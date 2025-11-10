@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router"
-import RootPage from "../RootPage/RootPage"
+
 import Home from "../Pages/Home"
 import AllProperties from "../Pages/AllProperties"
 import AddProperties from "../Pages/AddProperties"
@@ -9,11 +9,13 @@ import Login from "../Form/Login"
 import Signup from "../Form/Signup"
 import Error from "../Error/Error"
 import Private from "../Authentication/PrivatePage/Private"
+import UpdateProperty from "../PrivatePage/UpdateProperty"
+import RootPage from "./RootPage"
 
 const router = createBrowserRouter([
   {
     path: '/',
-    Component: RootPage,
+    Component:RootPage ,
     errorElement: <Error></Error>,
     children: [
       {
@@ -45,6 +47,14 @@ const router = createBrowserRouter([
         element: (
           <Private>
             <MyRatings></MyRatings>
+          </Private>
+        ),
+      },
+      {
+        path: 'UpdateProperty/:id',
+        element: (
+          <Private>
+            <UpdateProperty></UpdateProperty>
           </Private>
         ),
       },
