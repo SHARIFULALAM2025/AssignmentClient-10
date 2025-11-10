@@ -1,0 +1,18 @@
+nav ul li a{
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+nav ul li a.active{
+    border-bottom: 3px solid green ;
+}
+footer  ul li a{
+     display: flex;
+    align-items: center;
+    gap: 2px;
+
+}
+footer  ul li a.active{
+    text-decoration: underline;
+    
+}

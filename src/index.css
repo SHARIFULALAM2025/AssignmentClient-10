@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@plugin "daisyui";
+@custom-variant dark (&:where(.dark *));
+html, body,
+#root{
+    height:100%;
+}
