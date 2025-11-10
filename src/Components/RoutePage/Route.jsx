@@ -51,12 +51,17 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: 'UpdateProperty/:id',
+        path:'/UpdateView/:id',
         element: (
           <Private>
             <UpdateProperty></UpdateProperty>
           </Private>
         ),
+      },
+      {
+        path: "/ViewProperty",
+        c
+
       },
       {
         path: 'Login',

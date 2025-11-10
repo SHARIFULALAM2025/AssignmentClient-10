@@ -19,7 +19,7 @@ const AddProperties = () => {
       UserName: e.target.displayName.value,
       PostedDate: new Date()
     }
-      fetch('http://localhost:5000/Product', {
+      fetch('http://localhost:5000/product', {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
@@ -28,14 +28,13 @@ const AddProperties = () => {
       })
         .then((result) => result.json())
         .then((data) => {
-            console.log(data)
-            Swal.fire({
-              title: 'Your Property Successfully Added.',
-              icon: 'success',
-              draggable: true,
-            })
-            e.target.reset();
-
+          console.log(data)
+          Swal.fire({
+            title: 'Your Property Successfully Added.',
+            icon: 'success',
+            draggable: true,
+          })
+          e.target.reset()
         })
   }
 

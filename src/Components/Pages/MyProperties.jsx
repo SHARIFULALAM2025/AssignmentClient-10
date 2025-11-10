@@ -10,12 +10,11 @@ const MyProperties = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/Product/unique?email=${user.email}`)
-            .then(result => result.json())
-            .then(data => {
+        fetch(`http://localhost:5000/product/unique?email=${user.email}`)
+          .then((result) => result.json())
+          .then((data) => {
             setProperty(data)
-
-        })
+          })
     }, [user.email])
     return (
       <div>
