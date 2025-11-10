@@ -17,6 +17,7 @@ const AddProperties = () => {
       photoURL: e.target.photo.value,
       UserEmail: e.target.email.value,
       UserName: e.target.displayName.value,
+      PostedDate: new Date()
     }
       fetch('http://localhost:5000/Product', {
         method: 'POST',
@@ -65,6 +66,7 @@ const AddProperties = () => {
                     name="Category"
                     defaultValue="select"
                     className="select w-full"
+                    required
                   >
                     <option disabled={true}>select</option>
                     <option>Rent</option>
