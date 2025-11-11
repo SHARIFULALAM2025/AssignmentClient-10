@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { AuthContext } from '../Authentication/Auth/AuthContext'
 import { useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
-import { Rating } from '@smastrom/react-rating'
+
 import { useNavigate } from 'react-router'
 
 const RatingInfo = ({ details }) => {
@@ -13,6 +13,10 @@ const RatingInfo = ({ details }) => {
   const [review, setReview] = useState('')
   const handelRating = (e) => {
     e.preventDefault()
+    if (rating===0) {
+      toast.error("please select a rating")
+      return
+    }
     const RatingInfo = {
       reviewerName: user?.displayName,
       reviewerEmail: user?.email,
@@ -49,16 +53,23 @@ const RatingInfo = ({ details }) => {
         <legend className="p-1 border rounded-xl text-xs md:text-2xl">
           your feedback
         </legend>
-        <form onSubmit={handelRating} className="space-y-5">
-          <div className="">
-            <label htmlFor="">Rating</label>
+        <form onSubmit={handelRating} className="">
+          <div className="flex justify-center items-center">
             <div className="">
               {' '}
-              <Rating
-                style={{ maxWidth: 50 }}
-                value={rating}
-                onChange={setRating}
-              />
+              <div className="rating">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <input
+                    type="radio"
+                    key={star}
+                    checked={rating === star}
+                    name="rating-4"
+                    className="mask mask-star-2 bg-green-500"
+                    aria-label={`${star}star`}
+                    onChange={()=>setRating(star)}
+                  />
+                ))}
+              </div>
             </div>
           </div>
           <div className="">
