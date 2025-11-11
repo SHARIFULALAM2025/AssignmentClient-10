@@ -50,10 +50,10 @@ console.log(user);
   }
 
     return (
-      <div className="dark:bg-black  dark:text-white">
+      <div className="">
         <Component>
           {' '}
-          <nav className="flex justify-between  items-center p-1">
+          <nav className="flex justify-between dark:bg-black  dark:text-white items-center p-1">
             <div className="">
               <Link to="/" className="flex items-center ">
                 <figure>
@@ -97,7 +97,7 @@ console.log(user);
                 <div className="">
                   <figure onClick={handelShow} className="relative">
                     <img
-                      referrerPolicy='no-referrer'
+                      referrerPolicy="no-referrer"
                       src={user?.photoURL}
                       alt={user?.photoURL}
                       className="mx-auto w-10 h-10 rounded-full"

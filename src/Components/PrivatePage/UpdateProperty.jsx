@@ -7,7 +7,7 @@ import { toast, ToastContainer } from 'react-toastify'
 
 const UpdateProperty = () => {
   const { id } = useParams()
-  const { user } = useContext(AuthContext)
+  const { user, theme } = useContext(AuthContext)
   const [show, setShow] = useState({})
   const navigate = useNavigate()
 
@@ -54,7 +54,11 @@ const UpdateProperty = () => {
   return (
     <div>
       <Component>
-        <div className="">
+        <div
+          className={`${
+            theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'
+          }`}
+        >
           <fieldset className="fieldset border p-5  rounded-xl">
             <legend className="p-1 border rounded-xl text-xs md:text-2xl">
               Update your Property
@@ -67,7 +71,7 @@ const UpdateProperty = () => {
                   <input
                     name="name"
                     type="text"
-                    className="input w-full"
+                    className="input w-full text-black"
                     placeholder="Enter your Property Name"
                     defaultValue={show.PropertyName}
                     required
@@ -78,7 +82,7 @@ const UpdateProperty = () => {
                   <select
                     name="Category"
                     defaultValue={show.Category}
-                    className="select w-full"
+                    className="select w-full text-black"
                     required
                   >
                     <option disabled={true}>select</option>
@@ -96,7 +100,7 @@ const UpdateProperty = () => {
                   <input
                     name="Price"
                     type="number"
-                    className="input w-full"
+                    className="input w-full text-black"
                     placeholder="enter your property price"
                     defaultValue={show.Price}
                     required
@@ -108,7 +112,7 @@ const UpdateProperty = () => {
                   <input
                     name="location"
                     type="text"
-                    className="input w-full"
+                    className="input w-full text-black"
                     placeholder=" enter your (city, area, or address)"
                     defaultValue={show.location}
                     required
@@ -124,7 +128,7 @@ const UpdateProperty = () => {
                 <input
                   name="photo"
                   type="text"
-                  className="input w-full"
+                  className="input w-full text-black"
                   placeholder="https:// your property  url ..."
                   defaultValue={show.photoURL}
                   required
@@ -137,7 +141,7 @@ const UpdateProperty = () => {
                   <input
                     name="displayName"
                     type="text"
-                    className="input w-full"
+                    className="input w-full text-black"
                     defaultValue={user?.displayName}
                     readOnly
                   />
@@ -147,7 +151,7 @@ const UpdateProperty = () => {
                   <input
                     name="email"
                     type="email"
-                    className="input w-full"
+                    className="input w-full text-black"
                     defaultValue={user?.email}
                     readOnly
                   />
@@ -170,7 +174,7 @@ const UpdateProperty = () => {
 
               <div className="grid place-content-center">
                 {' '}
-                <button type="submit" className="btn btn-neutral px-6 py-3">
+                <button type="submit" className="btn btn-success px-6 py-3">
                   Update Property
                 </button>
               </div>

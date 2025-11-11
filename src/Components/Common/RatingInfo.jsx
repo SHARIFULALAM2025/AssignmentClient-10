@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router'
 
 const RatingInfo = ({ details }) => {
   const navigate = useNavigate()
-  const { user } = useContext(AuthContext)
+  const { user, theme } = useContext(AuthContext)
   const [rating, setRating] = useState(0)
   const [review, setReview] = useState('')
   const handelRating = (e) => {
@@ -48,8 +48,12 @@ const RatingInfo = ({ details }) => {
       .catch(() => toast.error('somthing went worng.'))
   }
   return (
-    <div>
-      <fieldset className="fieldset border p-1 rounded-xl">
+    <div
+      className={`grig md:grid-cols-2  ${
+        theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'
+      }`}
+    >
+      <fieldset className="fieldset border  rounded-xl p-1">
         <legend className="p-1 border rounded-xl text-xs md:text-2xl">
           your feedback
         </legend>
@@ -64,9 +68,9 @@ const RatingInfo = ({ details }) => {
                     key={star}
                     checked={rating === star}
                     name="rating-4"
-                    className="mask mask-star-2 bg-green-500"
+                    className="mask mask-star-2 bg-yellow-400"
                     aria-label={`${star}star`}
-                    onChange={()=>setRating(star)}
+                    onChange={() => setRating(star)}
                   />
                 ))}
               </div>
@@ -89,7 +93,7 @@ const RatingInfo = ({ details }) => {
 
           <div className="grid place-content-center">
             {' '}
-            <button type="submit" className="btn btn-neutral px-6 py-3">
+            <button type="submit" className="btn btn-success px-6 py-3">
               submit
             </button>
           </div>

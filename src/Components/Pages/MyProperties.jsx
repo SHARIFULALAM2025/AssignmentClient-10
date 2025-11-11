@@ -8,7 +8,7 @@ import Swal from 'sweetalert2'
 
 
 const MyProperties = () => {
-  const { user } = useContext(AuthContext)
+  const { user,theme } = useContext(AuthContext)
   const [property, setProperty] = useState([])
 
   useEffect(() => {
@@ -63,11 +63,15 @@ const MyProperties = () => {
   return (
     <div>
       <Component>
-        <div className="grid grid-cols-4 gap-4">
+        <div
+          className={`${
+            theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'
+          } grid grid-cols-4 gap-4`}
+        >
           {property.map((item) => (
             <div
               key={item._id}
-              className="bg-[#F1FAFF] p-5 space-y-3 shadow-md rounded-md"
+              className="bg-green-200 text-black p-5 space-y-3 shadow-md rounded-md"
             >
               <h1 className="text-[#004972] font-bold">{item.PropertyName}</h1>
               <div className="flex justify-between">
@@ -102,7 +106,6 @@ const MyProperties = () => {
           ))}
         </div>
       </Component>
-
     </div>
   )
 }

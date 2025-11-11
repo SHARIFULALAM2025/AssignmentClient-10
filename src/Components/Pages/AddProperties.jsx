@@ -5,19 +5,19 @@ import Swal from 'sweetalert2'
 
 
 const AddProperties = () => {
-  const { user } = useContext(AuthContext)
+  const { user,theme } = useContext(AuthContext)
   const handelProperty = (e) => {
     e.preventDefault()
     const propertyInformation = {
       PropertyName: e.target.name.value,
       Description: e.target.Description.value,
       Category: e.target.Category.value,
-      Price: e.target.Price.value,
+      Price: Number(e.target.Price.value),
       location: e.target.location.value,
       photoURL: e.target.photo.value,
       UserEmail: e.target.email.value,
       UserName: e.target.displayName.value,
-      PostedDate: new Date()
+      PostedDate: new Date(),
     }
       fetch('http://localhost:5000/product', {
         method: 'POST',
@@ -37,12 +37,16 @@ const AddProperties = () => {
           e.target.reset()
         })
   }
-
+//
   return (
     <div>
       <Component>
-        <div className="">
-          <fieldset className="fieldset border p-5  rounded-xl">
+        <div
+          className={`${
+            theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'
+          } mt-12 rounded-lg p-3 mb-6`}
+        >
+          <fieldset className="fieldset border p-5  rounded-xl ">
             <legend className="p-1 border rounded-xl text-xs md:text-2xl">
               Add your Property
             </legend>
@@ -54,7 +58,7 @@ const AddProperties = () => {
                   <input
                     name="name"
                     type="text"
-                    className="input w-full"
+                    className="input w-full text-black"
                     placeholder="Enter your Property Name"
                     required
                   />
@@ -64,7 +68,7 @@ const AddProperties = () => {
                   <select
                     name="Category"
                     defaultValue="select"
-                    className="select w-full"
+                    className="select w-full text-black"
                     required
                   >
                     <option disabled={true}>select</option>
@@ -82,7 +86,7 @@ const AddProperties = () => {
                   <input
                     name="Price"
                     type="number"
-                    className="input w-full"
+                    className="input w-full text-black"
                     placeholder="enter your property price"
                     required
                   />
@@ -93,7 +97,7 @@ const AddProperties = () => {
                   <input
                     name="location"
                     type="text"
-                    className="input w-full"
+                    className="input w-full text-black"
                     placeholder=" enter your (city, area, or address)"
                     required
                   />
@@ -108,7 +112,7 @@ const AddProperties = () => {
                 <input
                   name="photo"
                   type="text"
-                  className="input w-full"
+                  className="input w-full text-black"
                   placeholder="https:// your property  url ..."
                   required
                 />
@@ -120,7 +124,7 @@ const AddProperties = () => {
                   <input
                     name="displayName"
                     type="text"
-                    className="input w-full"
+                    className="input w-full text-black"
                     defaultValue={user?.displayName}
                     readOnly
                   />
@@ -130,7 +134,7 @@ const AddProperties = () => {
                   <input
                     name="email"
                     type="email"
-                    className="input w-full"
+                    className="input w-full text-black"
                     defaultValue={user?.email}
                     readOnly
                   />
@@ -143,16 +147,16 @@ const AddProperties = () => {
                 <textarea
                   name="Description"
                   id=""
-                  className="w-full border "
+                  className="w-full border bg-white rounded-lg text-black"
                   rows={10}
                   placeholder="enter your property description ......"
-                 required
+                  required
                 ></textarea>
               </div>
 
               <div className="grid place-content-center">
                 {' '}
-                <button type="submit" className="btn btn-neutral px-6 py-3">
+                <button type="submit" className="btn  px-6 btn-success py-3">
                   Add Property
                 </button>
               </div>

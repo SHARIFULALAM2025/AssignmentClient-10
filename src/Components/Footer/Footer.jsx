@@ -13,7 +13,7 @@ const Footer = () => {
     <div>
       <Component>
         <footer>
-          <div className="bg-[#004166] grid grid-cols-3 p-2">
+          <div className="bg-[#004166] grid  md:grid-cols-3 p-2">
             {/*  */}
             <div className="">
               <Link to="/" className="">
@@ -73,7 +73,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="bg-[#00314D]  p-2">
-            <div className="grid grid-cols-4">
+            <div className="grid grid-cols-2 md:grid-cols-4">
               <div className="">
                 <h1 className="text-white font-bold text-2xl">Company</h1>
                 <ul className="flex flex-col text-white space-y-3">

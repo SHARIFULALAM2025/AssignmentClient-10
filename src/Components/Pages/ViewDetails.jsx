@@ -8,7 +8,7 @@ import RatingInfo from '../Common/RatingInfo'
 const ViewDetails = () => {
   const { id } = useParams()
   const [details, setDetails] = useState({})
-  const { user } = useContext(AuthContext)
+  const { user, theme } = useContext(AuthContext)
   console.log(user)
 
   useEffect(() => {
@@ -22,7 +22,11 @@ const ViewDetails = () => {
   return (
     <div>
       <Component>
-        <div className="grig grid-cols-2">
+        <div
+          className={`grig md:grid-cols-2 ${
+            theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'
+          }`}
+        >
           <div className="">
             <figure>
               <img src={details.photoURL} alt="" className="" />
