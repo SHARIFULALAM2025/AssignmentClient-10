@@ -11,6 +11,7 @@ import Error from "../Error/Error"
 import Private from "../Authentication/PrivatePage/Private"
 import UpdateProperty from "../PrivatePage/UpdateProperty"
 import RootPage from "./RootPage"
+import ViewDetails from "../Pages/ViewDetails"
 
 const router = createBrowserRouter([
   {
@@ -59,8 +60,8 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/ViewProperty",
-        c
+        path:"/ViewProperty/:id",
+        element:<Private><ViewDetails></ViewDetails></Private>
 
       },
       {

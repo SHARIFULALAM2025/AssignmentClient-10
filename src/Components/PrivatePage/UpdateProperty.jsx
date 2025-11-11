@@ -38,7 +38,7 @@ const UpdateProperty = () => {
         console.log(data)
         toast.success('updates in MongoDB ')
         setTimeout(() => {
-          navigate('/MyProperties', { state: true })
+          navigate(`/ViewProperty/${id}`, { state: true })
         }, 500)
       })
   }

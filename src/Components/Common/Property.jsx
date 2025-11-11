@@ -29,9 +29,12 @@ const Property = ({ property }) => {
               >
                 Update
               </Link>
-              <button className="bg-[#004972] rounded-full px-3 py-1 text-white">
+              <Link
+                to={`/ViewProperty/${item._id}`}
+                className="bg-[#004972] rounded-full px-3 py-1 text-white"
+              >
                 View Details
-              </button>
+              </Link>
               <button className="bg-[#AF0800] rounded-full px-3 py-1 text-white">
                 Delete
               </button>
