@@ -3,6 +3,7 @@ import { useParams } from 'react-router'
 import Component from '../Component/Component'
 import { useContext } from 'react'
 import { AuthContext } from '../Authentication/Auth/AuthContext'
+import RatingInfo from '../Common/RatingInfo'
 
 const ViewDetails = () => {
   const { id } = useParams()
@@ -38,6 +39,7 @@ const ViewDetails = () => {
             <img src={user?.photoURL} alt="" className="" />
           </div>
         </div>
+        <RatingInfo details={details}></RatingInfo>
       </Component>
     </div>
   )

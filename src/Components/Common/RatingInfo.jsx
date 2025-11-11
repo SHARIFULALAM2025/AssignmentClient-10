@@ -1,0 +1,92 @@
+import React from 'react'
+import { useContext } from 'react'
+import { AuthContext } from '../Authentication/Auth/AuthContext'
+import { useState } from 'react'
+import { toast, ToastContainer } from 'react-toastify'
+import { Rating } from '@smastrom/react-rating'
+import { useNavigate } from 'react-router'
+
+const RatingInfo = ({ details }) => {
+  const navigate = useNavigate()
+  const { user } = useContext(AuthContext)
+  const [rating, setRating] = useState(0)
+  const [review, setReview] = useState('')
+  const handelRating = (e) => {
+    e.preventDefault()
+    const RatingInfo = {
+      reviewerName: user?.displayName,
+      reviewerEmail: user?.email,
+      propertyId: details._id,
+      propertyName: details.PropertyName,
+      rating,
+      reviewText: review,
+      reviewDate: new Date(),
+      Thumbnail: details.photoURL,
+    }
+
+    fetch('http://localhost:5000/rating', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(RatingInfo),
+    })
+      .then((result) => result.json())
+      .then(() => {
+        toast.success('your feedback has been submitted ')
+        setRating(0)
+        setReview('')
+
+        setTimeout(() => {
+          navigate('/MyProperties', { state: true })
+        }, 1000)
+      })
+      .catch(() => toast.error('somthing went worng.'))
+  }
+  return (
+    <div>
+      <fieldset className="fieldset border p-1 rounded-xl">
+        <legend className="p-1 border rounded-xl text-xs md:text-2xl">
+          your feedback
+        </legend>
+        <form onSubmit={handelRating} className="space-y-5">
+          <div className="">
+            <label htmlFor="">Rating</label>
+            <div className="">
+              {' '}
+              <Rating
+                style={{ maxWidth: 50 }}
+                value={rating}
+                onChange={setRating}
+              />
+            </div>
+          </div>
+          <div className="">
+            <label htmlFor="">Description:</label>
+            <br></br>
+            <textarea
+              name="Description"
+              id=""
+              onChange={(e) => setReview(e.target.value)}
+              value={review}
+              className="w-full border "
+              rows={10}
+              placeholder="enter your property description ......"
+              required
+            ></textarea>
+          </div>
+
+          <div className="grid place-content-center">
+            {' '}
+            <button type="submit" className="btn btn-neutral px-6 py-3">
+              submit
+            </button>
+          </div>
+        </form>
+      </fieldset>
+      <ToastContainer />
+    </div>
+  )
+}
+
+export default RatingInfo
