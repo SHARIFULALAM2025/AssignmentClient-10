@@ -11,6 +11,7 @@ const Home = () => {
   const [newProperty, setNewProperty] = useState([])
   const { theme } = useContext(AuthContext)
   const [current, setCurrent] = useState(0)
+  const [loading,setLoading]=useState(true)
   const navigate = useNavigate()
   console.log(newProperty)
 
@@ -19,6 +20,7 @@ const Home = () => {
       .then((result) => result.json())
       .then((data) => {
         setNewProperty(data)
+        setLoading(false)
       })
   }, [])
   const handelNavigate = (id) => {
@@ -39,6 +41,10 @@ const Home = () => {
       setCurrent(current - 3)
     }
   }
+  if (loading) {
+    return <span className="loading loading-spinner loading-xl"></span>
+
+  }
 
   /*   */
   return (
@@ -51,7 +57,7 @@ const Home = () => {
         >
           <div className="">
             <div className="relative w-full overflow-hidden rounded-xl shadow-xl">
-              <div className="grid grid-cols-3 gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 {newProperty.slice(current, current + 3).map((item) => (
                   <div key={item._id} className="relative">
                     <figure>

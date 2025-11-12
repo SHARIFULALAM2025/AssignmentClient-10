@@ -60,7 +60,7 @@ console.log(user);
                   <img
                     src="/download.png"
                     alt=""
-                    className="md:w-12 md:h-12 w-10 h-10 rounded-full"
+                    className="md:w-12 space-x-3 md:h-12 w-10 h-10 rounded-full"
                   />
                 </figure>
                 <h1 className="md:text-2xl font-bold text-green-700">
@@ -138,7 +138,7 @@ console.log(user);
             </div>
 
             {show && (
-              <div className="absolute z-20 dark:bg-black  dark:text-white right-0 lg:mr-20 top-16 rounded-lg p-2 space-y-3">
+              <div className="absolute z-20 bg-green-200 dark:bg-black  dark:text-white right-0 lg:mr-20 top-16 rounded-lg p-2 space-y-3">
                 <h1 className="">{user?.displayName}</h1>
                 <h1 className="">{user?.email}</h1>
                 <button
@@ -151,7 +151,7 @@ console.log(user);
             )}
             {/* small device */}
             {toggle && (
-              <div className="md:hidden absolute border p-2 dark:bg-black  dark:text-white rounded-lg top-16 z-10 space-y-3">
+              <div className="md:hidden bg-green-200 absolute border p-2 dark:bg-black  dark:text-white rounded-lg top-16 z-10 space-y-3">
                 <ul className="md:flex md:space-x-3 flex flex-col space-y-4">
                   {navData.map((item, index) => (
                     <li key={index} className="font-semibold">

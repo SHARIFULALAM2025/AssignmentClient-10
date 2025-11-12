@@ -3,17 +3,28 @@ import Component from '../Component/Component';
 import { AuthContext } from '../Authentication/Auth/AuthContext';
 
 const MyRatings = () => {
-    const [rating, setRating] = useState([])
+  const [rating, setRating] = useState([])
+  const [loading, setLoading] = useState(true);
+
     console.log(rating);
 
-const {theme}=useContext(AuthContext)
+const {theme,user}=useContext(AuthContext)
 
     useEffect(() => {
-        fetch('http://localhost:5000/rating').then(result => result.json()).then(data => {
-            setRating(data)
-
+      fetch('http://localhost:5000/rating', {
+        headers: {
+          authorization: `Bearer ${user.accessToken}`,
+        },
+      })
+        .then((result) => result.json())
+        .then((data) => {
+          setRating(data)
+          setLoading(false)
         })
-    },[])
+    }, [user.accessToken])
+  if (loading) {
+    return <span className="loading loading-spinner loading-xl"></span>
+  }
     return (
       <div>
         <Component>

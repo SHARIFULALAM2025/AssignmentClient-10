@@ -36,14 +36,16 @@ const Login = () => {
     e.preventDefault()
     const Email = e.target.email.value;
     const password = e.target.password.value;
+
     LoginUser(Email, password)
       .then(result => {
         const user = result.user;
         console.log(user);
+        toast.success('login successfully')
         setTimeout(() => {
           navigate('/',{state:true})
         }, 500);
-        toast.success("login successfully")
+
 
       })
       .catch(error => {
@@ -81,7 +83,7 @@ const Login = () => {
                 <div className="flex flex-col">
                   <label className="text-[14px] font-normal">Email</label>
                   <input
-                    //   ref={refEmail}
+
                     name="email"
                     className="py-2 rounded-sm border-2 border-[rgba(210,210,210,1)] outline-none"
                     type="email"
@@ -134,6 +136,7 @@ const Login = () => {
                   <p className="">or</p>
                   <div className="h-px bg-gray-500 w-full"></div>
                 </div>
+               
               </form>
               <div className="flex items-center justify-center py-2">
                 <button
@@ -146,8 +149,8 @@ const Login = () => {
             </div>
           </div>
         </div>
-        <ToastContainer />
       </Component>
+      <ToastContainer />
     </div>
   )
 }

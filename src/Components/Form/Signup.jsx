@@ -9,11 +9,11 @@ import Component from '../Component/Component'
 import { updateProfile } from 'firebase/auth'
 import { toast, ToastContainer } from 'react-toastify'
 
-
 const Signup = () => {
-const navigate=useNavigate()
+  const [error ,setError]=useState("")
+  const navigate = useNavigate()
   // password toggle start
-  const [eye, setShowEye] = useState(false);
+  const [eye, setShowEye] = useState(false)
   const { theme, createUser, setUser } = useContext(AuthContext)
   const handelPassword = () => {
     setShowEye(!eye)
@@ -21,43 +21,46 @@ const navigate=useNavigate()
   // password toggle end
   const handelSignUp = (e) => {
     e.preventDefault()
-    const Name = e.target.name.value;
-    const Email = e.target.email.value;
-    const Password = e.target.password.value;
-    const photo = e.target.photo.value;
+    const Name = e.target.name.value
+    const Email = e.target.email.value
+    const Password = e.target.password.value
+    const photo = e.target.photo.value
+    const text = /^(?=.*[A-Z]).*$/
+    const text1 = /^(?=.*[a-z]).*$/
+    const text2 = /^.{6,}$/
+    if (!text.test(Password)) {
+      setError('Password must have an Uppercase letter.')
+      return
+    }
+    if (!text1.test(Password)) {
+      setError('Password must have an Lowercase letter.')
+      return
+    }
+    if (!text2.test(Password)) {
+      setError('Password length 6 character.')
+      return
+    }
     createUser(Email, Password)
-      .then(result => {
+      .then((result) => {
         const user = result.user
         setUser(user)
         const profile = {
           displayName: Name,
-          photoURL: photo
-
+          photoURL: photo,
         }
         updateProfile(user, profile)
-          .then(() => {
-
-
-          })
+          .then(() => {})
           .catch()
-
-        setTimeout(() => {
-           navigate('/', { state: true })
-
-        }, 500);
         toast.success('sign up successfully')
-
+        setTimeout(() => {
+          navigate('/', { state: true })
+        }, 500)
       })
-      .catch(error => {
-        const errorMessage = error.message;
+      .catch((error) => {
+        const errorMessage = error.message
         toast.warn(errorMessage)
-    })
-
-
-
-
+      })
   }
-
 
   return (
     <div className="">
@@ -147,12 +150,13 @@ const navigate=useNavigate()
                 >
                   Sign Up
                 </button>
+                {error && <p className="text-red-700">{error}</p>}
               </form>
             </div>
           </div>
         </div>
-        <ToastContainer />
       </Component>
+      <ToastContainer />
     </div>
   )
 }

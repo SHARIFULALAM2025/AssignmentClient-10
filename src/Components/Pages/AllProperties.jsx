@@ -8,7 +8,7 @@ import { AuthContext } from '../Authentication/Auth/AuthContext'
 const AllProperties = () => {
   const [allData, setAllData] = useState([])
   const { theme } = useContext(AuthContext)
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(true)
   console.log(allData)
   const navigate = useNavigate()
   useEffect(() => {
@@ -16,26 +16,26 @@ const AllProperties = () => {
       .then((result) => result.json())
       .then((data) => {
         setAllData(data)
+        setLoading(false)
       })
   }, [])
   const handelNavigate = (id) => {
     navigate(`/ViewProperty/${id}`)
   }
-   const handelSearch = (e) => {
-     e.preventDefault()
-     const PropertyName = e.target.search.value
-     console.log(PropertyName)
-     setLoading(true)
-     fetch(`http://localhost:5000/search?search=${PropertyName}`)
-       .then((res) => res.json())
-       .then((data) => {
-         setAllData(data)
-         setLoading(false)
-       })
+  const handelSearch = (e) => {
+    e.preventDefault()
+    const PropertyName = e.target.search.value
+    console.log(PropertyName)
+    setLoading(true)
+    fetch(`http://localhost:5000/search?search=${PropertyName}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setAllData(data)
+        setLoading(false)
+      })
   }
   if (loading) {
     return <span className="loading loading-spinner loading-xl"></span>
-
   }
   return (
     <div>
@@ -48,35 +48,21 @@ const AllProperties = () => {
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
           }}
-          className="h-72 text-center"
+          className="h-72 relative"
         >
-          <div className="">
+          <div className="absolute md:left-1/2 top-24">
             <form onSubmit={handelSearch} className="">
-              <label className="input rounded-full mt-16">
-                <svg
-                  className="h-[1em] opacity-50"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                >
-                  <g
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
-                    strokeWidth="2.5"
-                    fill="none"
-                    stroke="currentColor"
-                  >
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <path d="m21 21-4.3-4.3"></path>
-                  </g>
-                </svg>
+              <div className="bg-white/60 md:p-3 flex  p-2 rounded-full backdrop-blur-md">
                 <input
                   type="search"
                   name="search"
                   placeholder="Search"
-                  className="w-96"
+                  className="w-full rounded-full outline-none bg-transparent"
                 />
-              </label>
-              <button className="btn rounded btn-primary mt-16">Search</button>
+                <button className="md:btn px-3 py-2 bg-green-500 rounded md:btn-primary ">
+                  Search
+                </button>
+              </div>
             </form>
           </div>
         </div>

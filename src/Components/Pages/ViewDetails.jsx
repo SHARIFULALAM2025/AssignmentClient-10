@@ -8,16 +8,24 @@ import RatingInfo from '../Common/RatingInfo'
 const ViewDetails = () => {
   const { id } = useParams()
   const [details, setDetails] = useState({})
-  const { user, theme } = useContext(AuthContext)
+  const { user, theme,loading,setLoading } = useContext(AuthContext)
   console.log(user)
 
   useEffect(() => {
-    fetch(`http://localhost:5000/product/${id}`)
+    fetch(`http://localhost:5000/product/${id}`, {
+      headers: {
+        authorization: `Bearer ${user.accessToken}`,
+      },
+    })
       .then((result) => result.json())
       .then((data) => {
         setDetails(data)
+        setLoading(false)
       })
-  }, [id])
+  }, [id, user.accessToken, setLoading])
+  if (loading) {
+    return <span className="loading loading-spinner loading-xl"></span>
+  }
 
   return (
     <div>

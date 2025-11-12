@@ -12,18 +12,20 @@ import { auth } from '../Firebase.init'
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
+  console.log(user);
+  
   const [theme,setTheme]=useState("light")
 
 
   const [loading, setLoading] = useState(true)
   // new user
   const createUser = (Email, Password) => {
-    
+
     return createUserWithEmailAndPassword(auth, Email, Password)
   }
   //  login user
   const LoginUser = (Email, Password) => {
-    loading(true)
+
     return signInWithEmailAndPassword(auth, Email, Password)
   }
 

@@ -6,18 +6,23 @@ import { AuthContext } from '../Authentication/Auth/AuthContext'
 import { Link } from 'react-router'
 import Swal from 'sweetalert2'
 
-
 const MyProperties = () => {
-  const { user,theme } = useContext(AuthContext)
+  const { user, theme } = useContext(AuthContext)
   const [property, setProperty] = useState([])
+  const [loading, setLoading]=useState(true)
 
   useEffect(() => {
-    fetch(`http://localhost:5000/product/unique?email=${user.email}`)
+    fetch(`http://localhost:5000/product/unique?email=${user.email}`, {
+      headers: {
+        authorization: `Bearer ${user.accessToken}`,
+      },
+    })
       .then((result) => result.json())
       .then((data) => {
         setProperty(data)
+        setLoading(false)
       })
-  }, [user.email])
+  }, [user.email, user.accessToken])
 
   const handelDelete = (id) => {
     const swalWithBootstrapButtons = Swal.mixin({
@@ -40,6 +45,9 @@ const MyProperties = () => {
       .then((result) => {
         if (result.isConfirmed) {
           fetch(`http://localhost:5000/product/${id}`, {
+            headers: {
+              authorization: `Bearer ${user.accessToken}`,
+            },
             method: 'DELETE',
           })
             .then((result) => result.json())
@@ -60,13 +68,16 @@ const MyProperties = () => {
         }
       })
   }
+  if (loading) {
+    return <span className="loading loading-spinner loading-xl"></span>
+  }
   return (
     <div>
       <Component>
         <div
           className={`${
             theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'
-          } grid grid-cols-4 gap-4`}
+          } grid grid-cols-1 md:grid-cols-4 gap-4`}
         >
           {property.map((item) => (
             <div

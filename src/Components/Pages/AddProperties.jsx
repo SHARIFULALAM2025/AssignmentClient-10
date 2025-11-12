@@ -1,13 +1,14 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import Component from '../Component/Component'
 import { AuthContext } from '../Authentication/Auth/AuthContext'
 import Swal from 'sweetalert2'
 
-
 const AddProperties = () => {
-  const { user,theme } = useContext(AuthContext)
+  const { user, theme } = useContext(AuthContext)
+  const [loading, setLoading] = useState(false)
   const handelProperty = (e) => {
     e.preventDefault()
+    setLoading(true)
     const propertyInformation = {
       PropertyName: e.target.name.value,
       Description: e.target.Description.value,
@@ -19,25 +20,32 @@ const AddProperties = () => {
       UserName: e.target.displayName.value,
       PostedDate: new Date(),
     }
-      fetch('http://localhost:5000/product', {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify(propertyInformation),
-      })
-        .then((result) => result.json())
-        .then((data) => {
-          console.log(data)
-          Swal.fire({
-            title: 'Your Property Successfully Added.',
-            icon: 'success',
-            draggable: true,
-          })
-          e.target.reset()
+    fetch('http://localhost:5000/product', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        authorization: `Bearer ${user.accessToken}`,
+      },
+      body: JSON.stringify(propertyInformation),
+    })
+      .then((result) => result.json())
+      .then((data) => {
+
+        console.log(data)
+
+        Swal.fire({
+          title: 'Your Property Successfully Added.',
+          icon: 'success',
+          draggable: true,
         })
+        e.target.reset()
+
+      })
   }
-//
+  //
+  if (loading) {
+    return <span className="loading loading-spinner loading-xl"></span>
+  }
   return (
     <div>
       <Component>

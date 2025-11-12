@@ -10,7 +10,7 @@ const Book = () => {
           theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'
         }`}
       >
-        <div className="flex justify-between items-center gap-3">
+        <div className="md:flex justify-between items-center gap-3">
           <div className="">
             <figure>
               <img

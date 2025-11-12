@@ -11,7 +11,7 @@ const {theme}=useContext(AuthContext)
           theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'
         }`}
       >
-        <div className="flex justify-between items-center gap-6">
+        <div className="md:flex justify-between items-center gap-6">
           <div className="">
             <figure>
               <img
