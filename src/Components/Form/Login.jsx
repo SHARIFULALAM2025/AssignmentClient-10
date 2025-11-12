@@ -4,7 +4,7 @@ import { FcGoogle } from 'react-icons/fc'
 import { IoEyeSharp } from 'react-icons/io5'
 import { Link, useNavigate } from 'react-router'
 import { AuthContext } from '../Authentication/Auth/AuthContext'
-import { toast } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
 import { useContext } from 'react'
 import Component from '../Component/Component'
 
@@ -17,7 +17,8 @@ const Login = () => {
     setShowEye(!eye)
   }
   //
-  const { setUser, CreateAccountGoogle, theme } = useContext(AuthContext)
+  const { setUser, CreateAccountGoogle, theme, LoginUser } =
+    useContext(AuthContext)
 
   const googleLogin = () => {
     CreateAccountGoogle().then((result) => {
@@ -29,6 +30,27 @@ const Login = () => {
       toast.warning(errorMessage)
 
     })
+  }
+  // Login
+  const handelLogin = (e) => {
+    e.preventDefault()
+    const Email = e.target.email.value;
+    const password = e.target.password.value;
+    LoginUser(Email, password)
+      .then(result => {
+        const user = result.user;
+        console.log(user);
+        setTimeout(() => {
+          navigate('/',{state:true})
+        }, 500);
+        toast.success("login successfully")
+
+      })
+      .catch(error => {
+        const errorMessage = error.message
+        toast.warning(errorMessage)
+    })
+
   }
 
   return (
@@ -55,7 +77,7 @@ const Login = () => {
               </Link>
             </p>
             <div className="">
-              <form className="space-y-5">
+              <form onSubmit={handelLogin} className="space-y-5">
                 <div className="flex flex-col">
                   <label className="text-[14px] font-normal">Email</label>
                   <input
@@ -124,6 +146,7 @@ const Login = () => {
             </div>
           </div>
         </div>
+        <ToastContainer />
       </Component>
     </div>
   )
