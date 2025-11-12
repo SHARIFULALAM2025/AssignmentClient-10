@@ -3,7 +3,7 @@ import { navData } from './NavData';
 import { Link, NavLink, useNavigate } from 'react-router';
 import '../../App.css'
 import { AuthContext } from '../Authentication/Auth/AuthContext';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { FaAlignJustify } from 'react-icons/fa'
 import { RxCross2 } from 'react-icons/rx'
 import { FaRegMoon } from 'react-icons/fa'
@@ -138,7 +138,7 @@ console.log(user);
             </div>
 
             {show && (
-              <div className="absolute dark:bg-black  dark:text-white right-0 lg:mr-20 top-16 rounded-lg p-2 space-y-3">
+              <div className="absolute z-20 dark:bg-black  dark:text-white right-0 lg:mr-20 top-16 rounded-lg p-2 space-y-3">
                 <h1 className="">{user?.displayName}</h1>
                 <h1 className="">{user?.email}</h1>
                 <button
@@ -180,6 +180,7 @@ console.log(user);
               </div>
             )}
           </nav>
+          <ToastContainer />
         </Component>
       </div>
     )

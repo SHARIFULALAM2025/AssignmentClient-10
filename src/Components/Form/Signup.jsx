@@ -3,22 +3,61 @@ import { useContext } from 'react'
 import { BsFillEyeSlashFill } from 'react-icons/bs'
 
 import { IoEyeSharp } from 'react-icons/io5'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { AuthContext } from '../Authentication/Auth/AuthContext'
 import Component from '../Component/Component'
+import { updateProfile } from 'firebase/auth'
+import { toast, ToastContainer } from 'react-toastify'
+
 
 const Signup = () => {
+const navigate=useNavigate()
   // password toggle start
   const [eye, setShowEye] = useState(false);
-  const { theme } = useContext(AuthContext)
+  const { theme, createUser, setUser } = useContext(AuthContext)
   const handelPassword = () => {
     setShowEye(!eye)
   }
   // password toggle end
-  // collect data from form
-  // const userInformation = {
+  const handelSignUp = (e) => {
+    e.preventDefault()
+    const Name = e.target.name.value;
+    const Email = e.target.email.value;
+    const Password = e.target.password.value;
+    const photo = e.target.photo.value;
+    createUser(Email, Password)
+      .then(result => {
+        const user = result.user
+        setUser(user)
+        const profile = {
+          displayName: Name,
+          photoURL: photo
 
-  // }
+        }
+        updateProfile(user, profile)
+          .then(() => {
+
+
+          })
+          .catch()
+
+        setTimeout(() => {
+           navigate('/', { state: true })
+
+        }, 500);
+        toast.success('sign up successfully')
+
+      })
+      .catch(error => {
+        const errorMessage = error.message;
+        toast.warn(errorMessage)
+    })
+
+
+
+
+  }
+
 
   return (
     <div className="">
@@ -47,7 +86,7 @@ const Signup = () => {
               </Link>
             </p>
             <div className="">
-              <form className="space-y-5">
+              <form onSubmit={handelSignUp} className="space-y-5">
                 <div className="flex flex-col space-y-3">
                   <label className="text-[14px] font-normal">Name:</label>
                   <input
@@ -112,6 +151,7 @@ const Signup = () => {
             </div>
           </div>
         </div>
+        <ToastContainer />
       </Component>
     </div>
   )
