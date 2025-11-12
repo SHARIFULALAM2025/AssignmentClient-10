@@ -4,6 +4,8 @@ import { useContext } from 'react'
 import { AuthContext } from '../Authentication/Auth/AuthContext'
 import { useNavigate } from 'react-router'
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
+import Choose from '../Common/Choose'
+import Book from '../Common/Book'
 
 const Home = () => {
   const [newProperty, setNewProperty] = useState([])
@@ -118,6 +120,8 @@ const Home = () => {
             ))}
           </div>
         </div>
+        <Choose></Choose>
+        <Book></Book>
       </Component>
     </div>
   )
