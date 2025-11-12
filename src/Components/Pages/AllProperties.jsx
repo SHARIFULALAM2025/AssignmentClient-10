@@ -68,7 +68,7 @@ const AllProperties = () => {
         </div>
 
         <div
-          className={`grid grid-cols-1 md:grid-cols-4 gap-3 mt-5 ${
+          className={`grid grid-cols-1 md:grid-cols-3 gap-3 mt-5 ${
             theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'
           } `}
         >

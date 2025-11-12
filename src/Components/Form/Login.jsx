@@ -4,16 +4,18 @@ import { FcGoogle } from 'react-icons/fc'
 import { IoEyeSharp } from 'react-icons/io5'
 import { Link, useNavigate } from 'react-router'
 import { AuthContext } from '../Authentication/Auth/AuthContext'
-import { toast, ToastContainer } from 'react-toastify'
+
 import { useContext } from 'react'
 import Component from '../Component/Component'
+import Swal from 'sweetalert2'
 
 const Login = () => {
-
   const navigate = useNavigate()
+  const [loading,setLoading]=useState(false)
   // password toggle
   const [eye, setShowEye] = useState(false)
-  const handelPassword = () => {
+  const handelPassword = (e) => {
+    e.preventDefault()
     setShowEye(!eye)
   }
   //
@@ -21,38 +23,50 @@ const Login = () => {
     useContext(AuthContext)
 
   const googleLogin = () => {
-    CreateAccountGoogle().then((result) => {
-      const user = result.user
-      setUser(user)
-      navigate('/', { state: true })
-    }).catch(error => {
-      const errorMessage = error.message;
-      toast.warning(errorMessage)
+    setLoading(true)
+    CreateAccountGoogle()
+      .then((result) => {
+        const user = result.user
+        setUser(user)
+        Swal.fire({title:"login successfully",icon:"success",draggable:true})
+        navigate('/', { state: true })
+      })
+      .catch((error) => {
+         Swal.fire({
+           title: 'login successfully',
+           icon: 'error',
+           text: error.message,
+           draggable: true,
+         })
 
-    })
+
+      })
+    .finally(()=>setLoading(false))
   }
   // Login
   const handelLogin = (e) => {
     e.preventDefault()
-    const Email = e.target.email.value;
-    const password = e.target.password.value;
+    const Email = e.target.email.value
+    const password = e.target.password.value
 
     LoginUser(Email, password)
-      .then(result => {
-        const user = result.user;
-        console.log(user);
-        toast.success('login successfully')
+      .then((result) => {
+        const user = result.user
+        console.log(user)
+        Swal.fire({
+          title: 'Login successfully!',
+          icon: 'success',
+          draggable: true,
+        })
+
         setTimeout(() => {
-          navigate('/',{state:true})
-        }, 500);
-
-
+          navigate('/', { state: true })
+        }, 500)
       })
-      .catch(error => {
+      .catch((error) => {
         const errorMessage = error.message
-        toast.warning(errorMessage)
-    })
-
+        console.log(errorMessage)
+      })
   }
 
   return (
@@ -83,7 +97,6 @@ const Login = () => {
                 <div className="flex flex-col">
                   <label className="text-[14px] font-normal">Email</label>
                   <input
-
                     name="email"
                     className="py-2 rounded-sm border-2 border-[rgba(210,210,210,1)] outline-none"
                     type="email"
@@ -124,9 +137,10 @@ const Login = () => {
                 <div className="">
                   <button
                     type="submit"
+                    disabled={loading}
                     className="btn w-full py-2 rounded-sm bg-pink-600 font-semibold hover:cursor-pointer"
                   >
-                    Log in
+                    { loading?"logining in...":'login'}Log in
                   </button>
                 </div>
 
@@ -136,7 +150,6 @@ const Login = () => {
                   <p className="">or</p>
                   <div className="h-px bg-gray-500 w-full"></div>
                 </div>
-               
               </form>
               <div className="flex items-center justify-center py-2">
                 <button
@@ -150,7 +163,6 @@ const Login = () => {
           </div>
         </div>
       </Component>
-      <ToastContainer />
     </div>
   )
 }

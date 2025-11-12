@@ -7,19 +7,23 @@ import { Link, useNavigate } from 'react-router'
 import { AuthContext } from '../Authentication/Auth/AuthContext'
 import Component from '../Component/Component'
 import { updateProfile } from 'firebase/auth'
-import { toast, ToastContainer } from 'react-toastify'
+import Swal from 'sweetalert2'
 
 const Signup = () => {
-  const [error ,setError]=useState("")
+  const [error, setError] = useState('')
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
   // password toggle start
   const [eye, setShowEye] = useState(false)
   const { theme, createUser, setUser } = useContext(AuthContext)
-  const handelPassword = () => {
+  const handelPassword = (e) => {
+    e.preventDefault()
     setShowEye(!eye)
   }
   // password toggle end
-  const handelSignUp = (e) => {
+  const handelSignUp = async (e) => {
+    setLoading(true)
+    setError('')
     e.preventDefault()
     const Name = e.target.name.value
     const Email = e.target.email.value
@@ -30,36 +34,44 @@ const Signup = () => {
     const text2 = /^.{6,}$/
     if (!text.test(Password)) {
       setError('Password must have an Uppercase letter.')
+      setLoading(false)
       return
     }
     if (!text1.test(Password)) {
       setError('Password must have an Lowercase letter.')
+      setLoading(false)
       return
     }
     if (!text2.test(Password)) {
       setError('Password length 6 character.')
+      setLoading(false)
       return
     }
-    createUser(Email, Password)
-      .then((result) => {
-        const user = result.user
-        setUser(user)
-        const profile = {
-          displayName: Name,
-          photoURL: photo,
-        }
-        updateProfile(user, profile)
-          .then(() => {})
-          .catch()
-        toast.success('sign up successfully')
-        setTimeout(() => {
-          navigate('/', { state: true })
-        }, 500)
+
+    try {
+      const result = await createUser(Email, Password)
+      const user = result.user
+      setUser(user)
+      await updateProfile(user, {
+        displayName: Name,
+        photoURL: photo,
       })
-      .catch((error) => {
-        const errorMessage = error.message
-        toast.warn(errorMessage)
+      Swal.fire({
+        title: 'signup successfully',
+        icon: 'success',
+        draggable: true,
       })
+      navigate('/', { state: true })
+    } catch (err) {
+      Swal.fire({
+        title: 'sign up fail',
+        icon: 'error',
+        text: err.message,
+        draggable: true,
+      })
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -147,8 +159,9 @@ const Signup = () => {
                 <button
                   type="submit"
                   className="btn w-full py-2 rounded-sm bg-amber-200  font-semibold hover:cursor-pointer"
+                  disabled={loading}
                 >
-                  Sign Up
+                  {loading ? ' Signing Up..' : ' Sign Up'}
                 </button>
                 {error && <p className="text-red-700">{error}</p>}
               </form>
@@ -156,7 +169,6 @@ const Signup = () => {
           </div>
         </div>
       </Component>
-      <ToastContainer />
     </div>
   )
 }

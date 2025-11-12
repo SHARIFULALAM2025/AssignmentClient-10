@@ -1,4 +1,4 @@
-import React, {  useContext, useState } from 'react';
+import React, {  useContext, useEffect, useState } from 'react';
 import { navData } from './NavData';
 import { Link, NavLink, useNavigate } from 'react-router';
 import '../../App.css'
@@ -43,10 +43,16 @@ console.log(user);
 
   }
   //
+  useEffect(() => {
+    const saveTheme = localStorage.getItem('theme') || 'light'
+    setTheme(saveTheme)
+    document.documentElement.classList.toggle('dark', saveTheme === 'dark')
+  }, [setTheme])
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
-    document.documentElement.classList.toggle('dark',newTheme === 'dark')
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+    localStorage.setItem('theme', newTheme)
   }
 
     return (
