@@ -13,8 +13,8 @@ const RatingInfo = ({ details }) => {
   const [review, setReview] = useState('')
   const handelRating = (e) => {
     e.preventDefault()
-    if (rating===0) {
-      toast.error("please select a rating")
+    if (rating === 0) {
+      toast.error('please select a rating')
       return
     }
     const RatingInfo = {
@@ -28,7 +28,7 @@ const RatingInfo = ({ details }) => {
       Thumbnail: details.photoURL,
     }
 
-    fetch('http://localhost:5000/rating', {
+    fetch('https://assignment-10-eosin.vercel.app/rating', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',

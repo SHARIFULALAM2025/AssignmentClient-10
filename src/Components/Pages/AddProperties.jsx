@@ -20,7 +20,7 @@ const AddProperties = () => {
       UserName: e.target.displayName.value,
       PostedDate: new Date(),
     }
-    fetch('http://localhost:5000/product', {
+    fetch('https://assignment-10-eosin.vercel.app/product', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -39,7 +39,7 @@ const AddProperties = () => {
         })
         e.target.reset()
       })
-    .finally(()=>setLoading(false))
+      .finally(() => setLoading(false))
   }
   //
   if (loading) {

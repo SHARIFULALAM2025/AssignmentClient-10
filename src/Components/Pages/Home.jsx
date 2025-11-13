@@ -12,12 +12,12 @@ const Home = () => {
   const [newProperty, setNewProperty] = useState([])
   const { theme } = useContext(AuthContext)
   const [current, setCurrent] = useState(0)
-  const [loading,setLoading]=useState(true)
+  const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
   console.log(newProperty)
 
   useEffect(() => {
-    fetch('http://localhost:5000/home/date')
+    fetch('https://assignment-10-eosin.vercel.app/home/date')
       .then((result) => result.json())
       .then((data) => {
         setNewProperty(data)
@@ -44,7 +44,6 @@ const Home = () => {
   }
   if (loading) {
     return <span className="loading loading-spinner loading-xl"></span>
-
   }
 
   /*   */

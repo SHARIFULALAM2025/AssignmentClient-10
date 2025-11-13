@@ -8,11 +8,11 @@ import RatingInfo from '../Common/RatingInfo'
 const ViewDetails = () => {
   const { id } = useParams()
   const [details, setDetails] = useState({})
-  const { user, theme,loading,setLoading } = useContext(AuthContext)
+  const { user, theme, loading, setLoading } = useContext(AuthContext)
   console.log(user)
 
   useEffect(() => {
-    fetch(`http://localhost:5000/product/${id}`, {
+    fetch(`https://assignment-10-eosin.vercel.app/product/${id}`, {
       headers: {
         authorization: `Bearer ${user.accessToken}`,
       },
