@@ -69,7 +69,7 @@ const Home = () => {
                       />
                     </figure>
                     <div className="absolute inset-0  flex flex-col justify-center items-center text-white text-center px-5 ">
-                      <h1 className="text-3xl font-bold">
+                      <h1 className="text-3xl font-bold text-green-600">
                         {item.PropertyName}
                       </h1>
                     </div>
