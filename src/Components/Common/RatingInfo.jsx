@@ -32,6 +32,7 @@ const RatingInfo = ({ details }) => {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
+        authorization: `Bearer ${user.accessToken}`,
       },
       body: JSON.stringify(RatingInfo),
     })

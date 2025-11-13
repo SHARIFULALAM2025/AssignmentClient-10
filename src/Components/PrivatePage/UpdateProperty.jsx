@@ -30,6 +30,7 @@ const UpdateProperty = () => {
       method: 'PUT',
       headers: {
         'content-type': 'application/json',
+        authorization: `Bearer ${user.accessToken}`,
       },
       body: JSON.stringify(updateData),
     })
@@ -44,12 +45,16 @@ const UpdateProperty = () => {
   }
 
   useEffect(() => {
-    fetch(`http://localhost:5000/product/${id}`)
+    fetch(`http://localhost:5000/product/${id}`, {
+      headers: {
+        authorization: `Bearer ${user.accessToken}`,
+      },
+    })
       .then((result) => result.json())
       .then((data) => {
         setShow(data)
       })
-  }, [id])
+  }, [id, user.accessToken])
 
   return (
     <div>

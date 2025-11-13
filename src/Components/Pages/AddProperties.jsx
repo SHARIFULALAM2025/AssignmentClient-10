@@ -30,7 +30,6 @@ const AddProperties = () => {
     })
       .then((result) => result.json())
       .then((data) => {
-
         console.log(data)
 
         Swal.fire({
@@ -39,8 +38,8 @@ const AddProperties = () => {
           draggable: true,
         })
         e.target.reset()
-
       })
+    .finally(()=>setLoading(false))
   }
   //
   if (loading) {

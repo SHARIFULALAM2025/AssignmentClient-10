@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router'
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 import Choose from '../Common/Choose'
 import Book from '../Common/Book'
+import ExtraSection from '../Component/ExtraSection'
 
 const Home = () => {
   const [newProperty, setNewProperty] = useState([])
@@ -128,6 +129,7 @@ const Home = () => {
         </div>
         <Choose></Choose>
         <Book></Book>
+        <ExtraSection></ExtraSection>
       </Component>
     </div>
   )

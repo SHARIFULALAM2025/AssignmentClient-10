@@ -11,7 +11,7 @@ const MyRatings = () => {
 const {theme,user}=useContext(AuthContext)
 
     useEffect(() => {
-      fetch('http://localhost:5000/rating', {
+      fetch('http://localhost:5000/rating/data', {
         headers: {
           authorization: `Bearer ${user.accessToken}`,
         },
