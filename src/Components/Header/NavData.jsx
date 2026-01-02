@@ -2,7 +2,7 @@ import { AiOutlinePlusCircle } from "react-icons/ai";
 import { FaBuilding, FaStar } from "react-icons/fa";
 import { IoHome } from "react-icons/io5";
 import { MdHomeWork } from "react-icons/md";
-
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 const navData = [
   {
     id: 1,
@@ -35,4 +35,12 @@ const navData = [
     icon: <FaStar className="w-5 h-5 text-yellow-800" />,
   },
 ]
-export { navData }
+const settingLink = [
+  {
+    id: 1,
+    path: '/account',
+    Name: 'Account',
+    icon: <AccountCircleIcon></AccountCircleIcon>,
+  },
+]
+export { navData, settingLink }

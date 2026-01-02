@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react'
+import 'swiper/css'
+import 'swiper/css/free-mode'
+import 'swiper/css/pagination'
+import { Autoplay, FreeMode, Pagination } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
 import Component from '../Component/Component'
 import { useContext } from 'react'
 import { AuthContext } from '../Authentication/Auth/AuthContext'
 import { useNavigate } from 'react-router'
-import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
+
 import Choose from '../Common/Choose'
 import Book from '../Common/Book'
 import ExtraSection from '../Component/ExtraSection'
@@ -11,7 +16,7 @@ import ExtraSection from '../Component/ExtraSection'
 const Home = () => {
   const [newProperty, setNewProperty] = useState([])
   const { theme } = useContext(AuthContext)
-  const [current, setCurrent] = useState(0)
+  // const [current, setCurrent] = useState(0)
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
   console.log(newProperty)
@@ -27,21 +32,7 @@ const Home = () => {
   const handelNavigate = (id) => {
     navigate(`/ViewProperty/${id}`)
   }
-  //carousel
-  const handelNext = () => {
-    if (current + 3 < newProperty.length - 1) {
-      setCurrent(current + 3)
-    } else {
-      setCurrent(0)
-    }
-  }
-  const handelPrev = () => {
-    if (current === 0) {
-      setCurrent(Math.max(newProperty.length - 3, 0))
-    } else {
-      setCurrent(current - 3)
-    }
-  }
+
   if (loading) {
     return <span className="loading loading-spinner loading-xl"></span>
   }
@@ -56,39 +47,57 @@ const Home = () => {
           }`}
         >
           <div className="">
-            <div className="relative w-full overflow-hidden rounded-xl shadow-xl">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                {newProperty.slice(current, current + 3).map((item) => (
-                  <div key={item._id} className="relative">
-                    <figure>
+            <Swiper
+              slidesPerView={2}
+              spaceBetween={30}
+              freeMode={true}
+              pagination={{
+                clickable: true,
+              }}
+              autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+              }}
+              modules={[FreeMode, Pagination, Autoplay]}
+              className="mySwiper"
+              breakpoints={{
+                0: {
+                  slidesPerView: 1,
+                  spaceBetween: 10,
+                },
+                650: {
+                  slidesPerView: 2,
+                  spaceBetween: 20,
+                },
+                1024: {
+                  slidesPerView: 2,
+                  spaceBetween: 30,
+                },
+              }}
+            >
+              {newProperty.map((item, index) => (
+                <SwiperSlide key={index}>
+                  <div className="" key={index}>
+                    <div className="relative h-75 w-full">
                       <img
                         src={item.photoURL}
-                        alt=""
-                        className="object-cover w-full h-64"
+                       
+                        alt="careImage"
+                        className="object-cover rounded"
                       />
-                    </figure>
-                    <div className="absolute inset-0  flex flex-col justify-center items-center text-white text-center px-5 ">
-                      <h1 className="text-3xl font-bold text-green-600">
-                        {item.PropertyName}
-                      </h1>
+                      <div className="absolute top-1/2">
+                        {' '}
+                        <h1 className="text-green-500 text-2xl font-bold">
+                          {item.PropertyName}
+                        </h1>
+                      </div>
                     </div>
                   </div>
-                ))}
-              </div>
-              <button
-                className="absolute left-8 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-green-500 text-black p-2 rounded-full"
-                onClick={handelPrev}
-              >
-                <IoIosArrowBack size={24}></IoIosArrowBack>
-              </button>
-              <button
-                className="absolute right-8 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-green-500 text-black p-2 rounded-full"
-                onClick={handelNext}
-              >
-                <IoIosArrowForward size={24}></IoIosArrowForward>
-              </button>
-            </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
+
           <div className={`grid grid-cols-1 md:grid-cols-3 gap-3 mt-5`}>
             {newProperty.map((item) => (
               <div

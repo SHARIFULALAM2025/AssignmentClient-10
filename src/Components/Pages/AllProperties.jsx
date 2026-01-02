@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router'
 
 import { useContext } from 'react'
 import { AuthContext } from '../Authentication/Auth/AuthContext'
+import SearchBar from '../SearchBar/SearchBar'
 
 const AllProperties = () => {
   const [allData, setAllData] = useState([])
@@ -54,13 +55,14 @@ const AllProperties = () => {
         >
           <div className="absolute md:left-1/2 top-24">
             <form onSubmit={handelSearch} className="">
-              <div className="bg-white/60 md:p-3 flex  p-2 rounded-full backdrop-blur-md">
-                <input
+              <div className="flex">
+                {/* <input
                   type="search"
                   name="search"
                   placeholder="Search"
                   className="w-full rounded-full outline-none bg-transparent"
-                />
+                /> */}
+                <SearchBar></SearchBar>
                 <button className="md:btn px-3 py-2 bg-green-500 rounded md:btn-primary ">
                   Search
                 </button>

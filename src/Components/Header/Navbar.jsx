@@ -1,195 +1,210 @@
-import React, {  useContext, useEffect, useState } from 'react';
-import { navData } from './NavData';
-import { Link, NavLink, useNavigate } from 'react-router';
+import React, { useContext,  } from 'react'
+import { navData, settingLink } from './NavData'
+import { Link, NavLink } from 'react-router'
 import '../../App.css'
-import { AuthContext } from '../Authentication/Auth/AuthContext';
-import { toast, ToastContainer } from 'react-toastify';
-import { FaAlignJustify } from 'react-icons/fa'
-import { RxCross2 } from 'react-icons/rx'
-import { FaRegMoon } from 'react-icons/fa'
-import { MdOutlineLightMode } from 'react-icons/md'
-import Component from '../Component/Component';
+import { AuthContext } from '../Authentication/Auth/AuthContext'
+import {  ToastContainer } from 'react-toastify'
 
+import Component from '../Component/Component'
+import AppBar from '@mui/material/AppBar'
+
+import Toolbar from '@mui/material/Toolbar'
+import Typography from '@mui/material/Typography'
+import IconButton from '@mui/material/IconButton'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
+import Tooltip from '@mui/material/Tooltip'
+import Avatar from '@mui/material/Avatar'
+import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
+import MenuIcon from '@mui/icons-material/Menu'
+import ReusableButton from '../ReusableButton/ReusableButton'
+import Logo from './Logo/Logo'
+import DarkMode from './DarkMode/DarkMode'
 const Navbar = () => {
-  const navigate = useNavigate()
-  const [toggle, setToggle] = useState(false)
-  const handelToggle = () => {
-    setToggle(!toggle)
+    const [anchorElNav, setAnchorElNav] = React.useState(null)
+  const [anchorElUser, setAnchorElUser] = React.useState(null)
 
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget)
   }
-  const { user, LogOut, setUser, setTheme, theme } =
-    useContext(AuthContext);
-console.log(user);
-
-  const [show, setShow] = useState(false)
-  const handelShow = () => {
-    setShow(!show)
-
-  }
-  const LogOutUser = () => {
-    LogOut().then(() => {
-      toast.success("log out successfully")
-      navigate('/', { state: true })
-      setShow(false)
-      setUser(null)
-
-
-
-    })
-      .catch(error => {
-        const ErrorMessage = error.message;
-        toast(ErrorMessage)
-    })
-
-  }
-  //
-  useEffect(() => {
-    const saveTheme = localStorage.getItem('theme') || 'light'
-    setTheme(saveTheme)
-    document.documentElement.classList.toggle('dark', saveTheme === 'dark')
-  }, [setTheme])
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    document.documentElement.classList.toggle('dark', newTheme === 'dark');
-    localStorage.setItem('theme', newTheme)
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget)
   }
 
-    return (
-      <div className="">
-        <Component>
-          {' '}
-          <nav className="flex justify-between dark:bg-black  dark:text-white items-center p-1">
-            <div className="">
-              <Link to="/" className="flex items-center ">
-                <figure>
-                  <img
-                    src="/download.png"
-                    alt=""
-                    className="md:w-12 space-x-3 md:h-12 w-10 h-10 rounded-full"
-                  />
-                </figure>
-                <h1 className="md:text-2xl font-bold text-green-700">
-                  HomeNest
-                </h1>
-              </Link>
-            </div>
-            <div className="md:flex hidden">
-              <ul className="flex space-x-3">
-                {navData.map((item, index) => (
-                  <li key={index} className="font-semibold">
-                    <NavLink to={item.path}>
-                      {item.icon}
-                      {item.Name}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="">
-              <button
-                onClick={toggleTheme}
-                className="rounded-full p-2 bg-purple-400 text-gray-600 hover:text-purple-400 transition-all ease-in-out shadow-md"
-              >
-                {theme === 'light' ? (
-                  <FaRegMoon className="w-5 h-5"></FaRegMoon>
-                ) : (
-                  <MdOutlineLightMode className="w-5 h-5"></MdOutlineLightMode>
-                )}
-              </button>
-            </div>
-            <div className="">
-              {user ? (
-                <div className="">
-                  <figure onClick={handelShow} className="relative">
-                    <img
-                      referrerPolicy="no-referrer"
-                      src={user?.photoURL}
-                      alt={user?.photoURL}
-                      className="mx-auto w-10 h-10 rounded-full"
-                    />
-                  </figure>
-                </div>
-              ) : (
-                <div className=" md:flex hidden flex-row space-x-2">
-                  {' '}
-                  <Link
-                    to="/Signup"
-                    className=" md:px-5 md:py-2 btn  bg-green-400"
-                  >
-                    Sign Up
-                  </Link>
-                  <Link
-                    to="/Login"
-                    className=" md:px-5 md:py-2 btn bg-blue-700"
-                  >
-                    Log in
-                  </Link>
-                </div>
-              )}
-            </div>
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null)
+  }
 
-            {/*  */}
-            <div className="md:hidden">
-              {toggle ? (
-                <button onClick={handelToggle} className="">
-                  {' '}
-                  <RxCross2></RxCross2>
-                </button>
-              ) : (
-                <button onClick={handelToggle} className="">
-                  <FaAlignJustify></FaAlignJustify>
-                </button>
-              )}
-            </div>
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null)
+  }
 
-            {show && (
-              <div className="absolute z-20 bg-green-200 dark:bg-black  dark:text-white right-0 lg:mr-20 top-16 rounded-lg p-2 space-y-3">
-                <h1 className="">{user?.displayName}</h1>
-                <h1 className="">{user?.email}</h1>
-                <button
-                  onClick={LogOutUser}
-                  className="px-4 py-2 text-black font-bold bg-teal-600 w-full"
+  const { user, theme } = useContext(AuthContext)
+  console.log(user)
+
+
+
+
+  return (
+    <div className="">
+      <Component>
+        {' '}
+
+        <nav>
+          <AppBar
+            // dark mode class
+            sx={{
+              backgroundColor: theme === 'light' ? 'white' : 'black',
+              color: theme === 'light' ? 'black' : 'white',
+
+              borderBottom: '1px solid #ddd',
+            }}
+            position="static"
+          >
+            {/* max width of navbar */}
+            <Toolbar disableGutters>
+              {/* large device */}
+              <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleOpenNavMenu}
+                  color="inherit"
                 >
-                  Log out
-                </button>
-              </div>
-            )}
-            {/* small device */}
-            {toggle && (
-              <div className="md:hidden bg-green-200 absolute border p-2 dark:bg-black  dark:text-white rounded-lg top-16 z-10 space-y-3">
-                <ul className="md:flex md:space-x-3 flex flex-col space-y-4">
-                  {navData.map((item, index) => (
-                    <li key={index} className="font-semibold">
-                      <NavLink to={item.path}>
-                        {item.icon}
-                        {item.Name}
+                  <MenuIcon />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorElNav}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                  }}
+                  open={Boolean(anchorElNav)}
+                  onClose={handleCloseNavMenu}
+                  sx={{ display: { xs: 'block', md: 'none' } }}
+                >
+                  <Logo></Logo>
+                  {navData.map((page) => (
+                    <MenuItem key={page.id} onClick={handleCloseNavMenu}>
+                      <NavLink to={page.path}>
+                        {' '}
+                        <Typography sx={{ textAlign: 'center' }}>
+                          {page.icon}
+                          {page.Name}
+                        </Typography>
                       </NavLink>
-                    </li>
+                    </MenuItem>
                   ))}
-                </ul>
-                <div className=" flex  flex-col space-y-3">
-                  {' '}
-                  <Link
-                    to="/Signup"
-                    className=" md:px-5 md:py-2 btn  bg-green-400"
-                  >
-                    Sign Up
-                  </Link>
-                  <Link
-                    to="/Login"
-                    className=" md:px-5 md:py-2 btn bg-blue-700"
-                  >
-                    Log in
-                  </Link>
-                </div>
-              </div>
-            )}
-          </nav>
-          <ToastContainer />
-        </Component>
-      </div>
-    )
-};
+                  {/* sow small device  */}
 
-export default Navbar;
+                  <Box sx={{ ml: 2 }}>
+                    <DarkMode></DarkMode>
+                  </Box>
+                </Menu>
+              </Box>
+
+              {/* design for small device */}
+              <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+                <Logo></Logo>
+              </Box>
+
+              <Box
+                sx={{
+                  flexGrow: 1,
+                  display: { xs: 'none', md: 'flex', justifyContent: 'center' },
+                }}
+              >
+                {navData.map((page) => (
+                  <NavLink to={page.path} key={page.id}>
+                    {' '}
+                    <Button
+                      onClick={handleCloseNavMenu}
+                      sx={{
+                        my: 2,
+                        //   color: theme === 'light' ? 'black' : 'white',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: 0.5,
+                      }}
+                    >
+                      {page.icon}
+                      {page.Name}
+                    </Button>
+                  </NavLink>
+                ))}
+              </Box>
+
+              {/* i want to small device hide large device */}
+
+              <Box sx={{ mr: 1, display: { xs: 'none', md: 'block' } }}>
+                <DarkMode></DarkMode>
+              </Box>
+              {/*  */}
+
+              {/* if user thake then sow blew the component otherwise show login page */}
+              {user ? (
+                <Box sx={{ flexGrow: 0 }}>
+                  <Tooltip title="Open settings" arrow>
+                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                      <Avatar
+                        referrerPolicy="no-referrer"
+                        alt=""
+                        src={user?.photoURL}
+                      />
+                    </IconButton>
+                  </Tooltip>
+                  <Menu
+                    sx={{ mt: '45px' }}
+                    id="menu-appbar"
+                    anchorEl={anchorElUser}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    open={Boolean(anchorElUser)}
+                    onClose={handleCloseUserMenu}
+                  >
+                    {settingLink.map((setting) => (
+                      <MenuItem key={setting.id} onClick={handleCloseUserMenu}>
+                        <NavLink to={setting.path}>
+                          <Typography sx={{ textAlign: 'center' }}>
+                            {setting.icon}
+                            {setting.Name}
+                          </Typography>
+                        </NavLink>
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                </Box>
+              ) : (
+                <Link to="/Signup">
+                  <ReusableButton
+                    text="register"
+                    variant="contained"
+                  ></ReusableButton>
+                </Link>
+              )}
+            </Toolbar>
+          </AppBar>
+        </nav>
+        <ToastContainer />
+      </Component>
+    </div>
+  )
+}
+
+export default Navbar

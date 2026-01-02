@@ -12,16 +12,21 @@ import Private from "../Authentication/PrivatePage/Private"
 import UpdateProperty from "../PrivatePage/UpdateProperty"
 import RootPage from "./RootPage"
 import ViewDetails from "../Pages/ViewDetails"
+import Account from "../Account/Account"
 
 const router = createBrowserRouter([
   {
     path: '/',
-    Component:RootPage ,
+    Component: RootPage,
     errorElement: <Error></Error>,
     children: [
       {
         index: true,
         Component: Home,
+      },
+      {
+        path: 'account',
+        Component:Account
       },
       {
         path: 'AllProperties',
@@ -52,7 +57,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path:'/UpdateView/:id',
+        path: '/UpdateView/:id',
         element: (
           <Private>
             <UpdateProperty></UpdateProperty>
@@ -60,9 +65,12 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path:"/ViewProperty/:id",
-        element:<Private><ViewDetails></ViewDetails></Private>
-
+        path: '/ViewProperty/:id',
+        element: (
+          <Private>
+            <ViewDetails></ViewDetails>
+          </Private>
+        ),
       },
       {
         path: 'Login',
