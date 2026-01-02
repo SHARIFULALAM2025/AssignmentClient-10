@@ -8,6 +8,8 @@ import { AuthContext } from '../Authentication/Auth/AuthContext'
 import Component from '../Component/Component'
 import { updateProfile } from 'firebase/auth'
 import Swal from 'sweetalert2'
+import Social from './Social/Social'
+import ReusableButton from '../ReusableButton/ReusableButton'
 
 const Signup = () => {
   const [error, setError] = useState('')
@@ -156,15 +158,23 @@ const Signup = () => {
                   )}
                 </div>
 
-                <button
+                <ReusableButton
+                  sx={{width:"100%"}}
+                  text="Sign Up"
                   type="submit"
-                  className="btn w-full py-2 rounded-sm bg-amber-200  font-semibold hover:cursor-pointer"
-                  disabled={loading}
-                >
-                  {loading ? ' Signing Up..' : ' Sign Up'}
-                </button>
+                  variant="contained"
+                  color="success"
+                ></ReusableButton>
                 {error && <p className="text-red-700">{error}</p>}
+                <div className="flex justify-center items-center gap-4">
+                  <div className="h-px bg-gray-500 w-full"></div>
+                  <p className="">or</p>
+                  <div className="h-px bg-gray-500 w-full"></div>
+                </div>
               </form>
+              <div className="">
+                <Social></Social>
+              </div>
             </div>
           </div>
         </div>

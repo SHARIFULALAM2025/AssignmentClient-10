@@ -8,10 +8,12 @@ import { AuthContext } from '../Authentication/Auth/AuthContext'
 import { useContext } from 'react'
 import Component from '../Component/Component'
 import Swal from 'sweetalert2'
+import Social from './Social/Social'
+import ReusableButton from '../ReusableButton/ReusableButton'
 
 const Login = () => {
   const navigate = useNavigate()
-  const [loading,setLoading]=useState(false)
+
   // password toggle
   const [eye, setShowEye] = useState(false)
   const handelPassword = (e) => {
@@ -19,30 +21,8 @@ const Login = () => {
     setShowEye(!eye)
   }
   //
-  const { setUser, CreateAccountGoogle, theme, LoginUser } =
-    useContext(AuthContext)
+  const { theme, LoginUser } = useContext(AuthContext)
 
-  const googleLogin = () => {
-    setLoading(true)
-    CreateAccountGoogle()
-      .then((result) => {
-        const user = result.user
-        setUser(user)
-        Swal.fire({title:"login successfully",icon:"success",draggable:true})
-        navigate('/', { state: true })
-      })
-      .catch((error) => {
-         Swal.fire({
-           title: 'login successfully',
-           icon: 'error',
-           text: error.message,
-           draggable: true,
-         })
-
-
-      })
-    .finally(()=>setLoading(false))
-  }
   // Login
   const handelLogin = (e) => {
     e.preventDefault()
@@ -93,7 +73,7 @@ const Login = () => {
               </Link>
             </p>
             <div className="">
-              <form onSubmit={handelLogin} className="space-y-5">
+              <form onSubmit={handelLogin} className="space-y-3">
                 <div className="flex flex-col">
                   <label className="text-[14px] font-normal">Email</label>
                   <input
@@ -135,13 +115,13 @@ const Login = () => {
                   </p>
                 </div>
                 <div className="">
-                  <button
+                  <ReusableButton
+                    sx={{ width: '100%' }}
+                    text="Login"
                     type="submit"
-                    disabled={loading}
-                    className="btn w-full py-2 rounded-sm bg-pink-600 font-semibold hover:cursor-pointer"
-                  >
-                    { loading?"logining in...":'login'}Log in
-                  </button>
+                    variant="contained"
+                    color="success"
+                  ></ReusableButton>
                 </div>
 
                 {/* sign in log  end  */}
@@ -151,13 +131,8 @@ const Login = () => {
                   <div className="h-px bg-gray-500 w-full"></div>
                 </div>
               </form>
-              <div className="flex items-center justify-center py-2">
-                <button
-                  onClick={googleLogin}
-                  className="flex w-full py-2  place-content-center items-center gap-3 rounded-sm border-2 border-[rgba(210,210,210,1)] hover:cursor-pointer"
-                >
-                  <FcGoogle></FcGoogle>Sign In With Google
-                </button>
+              <div className="">
+                <Social></Social>
               </div>
             </div>
           </div>

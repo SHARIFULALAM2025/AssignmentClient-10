@@ -6,7 +6,13 @@ import { useContext } from 'react'
 import { AuthContext } from '../Authentication/Auth/AuthContext'
 import SearchBar from '../SearchBar/SearchBar'
 import Loading from '../Loading/Loading'
-
+import Card from '@mui/material/Card'
+import CardActions from '@mui/material/CardActions'
+import CardContent from '@mui/material/CardContent'
+import CardMedia from '@mui/material/CardMedia'
+import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography'
+import ReusableButton from '../ReusableButton/ReusableButton'
 const AllProperties = () => {
   const [allData, setAllData] = useState([])
   const { theme } = useContext(AuthContext)
@@ -73,38 +79,72 @@ const AllProperties = () => {
         </div>
 
         <div
-          className={`grid grid-cols-1 md:grid-cols-3 gap-3 mt-5 ${
+          className={`grid grid-cols-1 md:grid-cols-5 gap-3 mt-5 ${
             theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'
           } `}
         >
-          {allData.map((item) => (
-            <div
-              key={item._id}
-              className="bg-green-200 p-2 rounded-lg text-black"
-            >
-              <figure>
-                <img
-                  src={item.photoURL}
-                  alt=""
-                  className="bg-cover w-full h-62"
-                />
-              </figure>
-              <div className="flex justify-between items-center">
-                <h1 className="">{item.PropertyName}</h1>
-                <h2 className="">{item.Category}</h2>
-              </div>
-              <div className="flex justify-between items-center">
-                <h1 className="">{item.Price}</h1>
-                <h2 className="">{item.location}</h2>
-              </div>
-              <h1 className="">{item.UserEmail}</h1>
-              <button
-                onClick={() => handelNavigate(item._id)}
-                className="w-full px-3 py-1 bg-blue-500"
-              >
-                See Details
-              </button>
-            </div>
+          {allData.map((item, index) => (
+            <Card sx={{ maxWidth: 345 }} key={index}>
+              <CardMedia
+                sx={{ height: 140 }}
+                image={item.photoURL}
+                title="green iguana"
+              />
+              <CardContent>
+                <Typography
+                  gutterBottom
+                  sx={{ textAlgin: 'center' }}
+                  component="div"
+                >
+                  {item.PropertyName}
+                </Typography>
+                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                  {item.Category}
+                </Typography>
+                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                  {item.location}
+                </Typography>
+              </CardContent>
+              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                {item.Price}
+              </Typography>
+              <CardActions>
+                <ReusableButton
+                  sx={{ width: '100%' }}
+                  variant="contained"
+                  color="success"
+                  text=" See Details"
+                  onClick={() => handelNavigate(item._id)}
+                ></ReusableButton>
+              </CardActions>
+            </Card>
+            // <div
+            //   key={item._id}
+            //   className="bg-green-200 p-2 rounded-lg text-black"
+            // >
+            //   <figure>
+            //     <img
+            //       src={item.photoURL}
+            //       alt=""
+            //       className="bg-cover w-full h-62"
+            //     />
+            //   </figure>
+            //   <div className="flex justify-between items-center">
+            //     <h1 className="">{item.PropertyName}</h1>
+            //     <h2 className="">{item.Category}</h2>
+            //   </div>
+            //   <div className="flex justify-between items-center">
+            //     <h1 className="">{item.Price}</h1>
+            //     <h2 className="">{item.location}</h2>
+            //   </div>
+            //   <h1 className="">{item.UserEmail}</h1>
+            //   <button
+            //     onClick={() => handelNavigate(item._id)}
+            //     className="w-full px-3 py-1 bg-blue-500"
+            //   >
+            //     See Details
+            //   </button>
+            // </div>
           ))}
         </div>
       </Component>

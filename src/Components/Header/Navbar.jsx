@@ -54,8 +54,12 @@ const ShowNavData = user ? navData : updateNaveLink
           <AppBar
             // dark mode class
             sx={{
-              backgroundColor: theme === 'light' ? 'white' : 'black',
-              color: theme === 'light' ? 'black' : 'white',
+              background:
+                theme === 'light'
+                  ? "black"
+                  : 'white',
+              // backgroundColor: theme === 'light' ? 'white' : 'black',
+              color: theme === 'light' ? 'white' : 'black',
 
               borderBottom: '1px solid #ddd',
             }}
