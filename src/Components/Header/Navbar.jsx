@@ -41,16 +41,15 @@ const Navbar = () => {
   }
 
   const { user, theme } = useContext(AuthContext)
-  console.log(user)
 
-
+const updateNaveLink= navData.filter(item=>[1,2,4].includes(item.id))
+const ShowNavData = user ? navData : updateNaveLink
 
 
   return (
     <div className="">
       <Component>
         {' '}
-
         <nav>
           <AppBar
             // dark mode class
@@ -93,7 +92,7 @@ const Navbar = () => {
                   sx={{ display: { xs: 'block', md: 'none' } }}
                 >
                   <Logo></Logo>
-                  {navData.map((page) => (
+                  {ShowNavData.map((page) => (
                     <MenuItem key={page.id} onClick={handleCloseNavMenu}>
                       <NavLink to={page.path}>
                         {' '}
@@ -123,7 +122,7 @@ const Navbar = () => {
                   display: { xs: 'none', md: 'flex', justifyContent: 'center' },
                 }}
               >
-                {navData.map((page) => (
+                {ShowNavData.map((page) => (
                   <NavLink to={page.path} key={page.id}>
                     {' '}
                     <Button
