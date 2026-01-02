@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router'
 import { useContext } from 'react'
 import { AuthContext } from '../Authentication/Auth/AuthContext'
 import SearchBar from '../SearchBar/SearchBar'
+import Loading from '../Loading/Loading'
 
 const AllProperties = () => {
   const [allData, setAllData] = useState([])
@@ -38,7 +39,7 @@ const AllProperties = () => {
       })
   }
   if (loading) {
-    return <span className="loading loading-spinner loading-xl"></span>
+    return <Loading></Loading>
   }
   return (
     <div>

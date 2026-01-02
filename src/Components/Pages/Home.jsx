@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router'
 import Choose from '../Common/Choose'
 import Book from '../Common/Book'
 import ExtraSection from '../Component/ExtraSection'
+import Loading from '../Loading/Loading'
 
 const Home = () => {
   const [newProperty, setNewProperty] = useState([])
@@ -34,7 +35,7 @@ const Home = () => {
   }
 
   if (loading) {
-    return <span className="loading loading-spinner loading-xl"></span>
+    return <Loading></Loading>
   }
 
   /*   */
@@ -81,7 +82,7 @@ const Home = () => {
                     <div className="relative h-75 w-full">
                       <img
                         src={item.photoURL}
-                       
+
                         alt="careImage"
                         className="object-cover rounded"
                       />
