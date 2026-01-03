@@ -43,7 +43,7 @@ const RatingInfo = ({ details }) => {
         setReview('')
 
         setTimeout(() => {
-          navigate('/MyProperties', { state: true })
+          navigate('/AllProperties', { state: true })
         }, 1000)
       })
       .catch(() => toast.error('somthing went worng.'))

@@ -33,30 +33,8 @@ const router = createBrowserRouter([
         path: 'AllProperties',
         element: <AllProperties></AllProperties>,
       },
-      {
-        path: 'AddProperties',
-        element: (
-          <Private>
-            <AddProperties></AddProperties>
-          </Private>
-        ),
-      },
-      {
-        path: 'MyProperties',
-        element: (
-          <Private>
-            <MyProperties></MyProperties>
-          </Private>
-        ),
-      },
-      {
-        path: 'MyRatings',
-        element: (
-          <Private>
-            <MyRatings></MyRatings>
-          </Private>
-        ),
-      },
+      
+
       {
         path: '/UpdateView/:id',
         element: (
@@ -93,11 +71,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'dashboard/MyProperty',
-        Component: AddProperties,
+        Component:MyProperties,
       },
       {
         path: 'dashboard/MyRating',
-        Component: AddProperties,
+        Component: MyRatings,
       },
     ],
   },
