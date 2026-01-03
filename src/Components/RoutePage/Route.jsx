@@ -27,7 +27,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'account',
-        Component:Account
+        Component: Account,
       },
       {
         path: 'AllProperties',
@@ -84,8 +84,22 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "dashboard",
-    Component:Dashboard
-  }
+    path: 'dashboard',
+    Component: Dashboard,
+    children: [
+      {
+        path: 'dashboard/AddProperty',
+        Component: AddProperties,
+      },
+      {
+        path: 'dashboard/MyProperty',
+        Component: AddProperties,
+      },
+      {
+        path: 'dashboard/MyRating',
+        Component: AddProperties,
+      },
+    ],
+  },
 ])
  export {router}
