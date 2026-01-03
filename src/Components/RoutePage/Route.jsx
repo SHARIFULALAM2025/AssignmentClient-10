@@ -13,6 +13,7 @@ import UpdateProperty from "../PrivatePage/UpdateProperty"
 import RootPage from "./RootPage"
 import ViewDetails from "../Pages/ViewDetails"
 import Account from "../Account/Account"
+import Dashboard from "../Dashboard/Dashboard"
 
 const router = createBrowserRouter([
   {
@@ -82,5 +83,9 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "dashboard",
+    Component:Dashboard
+  }
 ])
  export {router}
