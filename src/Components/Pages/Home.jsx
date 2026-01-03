@@ -8,12 +8,18 @@ import Component from '../Component/Component'
 import { useContext } from 'react'
 import { AuthContext } from '../Authentication/Auth/AuthContext'
 import { useNavigate } from 'react-router'
-
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
 import Choose from '../Common/Choose'
 import Book from '../Common/Book'
 import ExtraSection from '../Component/ExtraSection'
 import Loading from '../Loading/Loading'
-
+import Card from '@mui/material/Card'
+import CardActions from '@mui/material/CardActions'
+import CardContent from '@mui/material/CardContent'
+import CardMedia from '@mui/material/CardMedia'
+import PlaceIcon from '@mui/icons-material/Place'
+import Typography from '@mui/material/Typography'
+import ReusableButton from '../ReusableButton/ReusableButton'
 const Home = () => {
   const [newProperty, setNewProperty] = useState([])
   const { theme } = useContext(AuthContext)
@@ -79,10 +85,9 @@ const Home = () => {
               {newProperty.map((item, index) => (
                 <SwiperSlide key={index}>
                   <div className="" key={index}>
-                    <div className="relative h-75 w-full">
+                    <div className="relative h-62 w-full">
                       <img
                         src={item.photoURL}
-
                         alt="careImage"
                         className="object-cover rounded"
                       />
@@ -99,40 +104,87 @@ const Home = () => {
             </Swiper>
           </div>
 
-          <div className={`grid grid-cols-1 md:grid-cols-3 gap-3 mt-5`}>
+          <div className={`grid grid-cols-1 md:grid-cols-5 gap-3 mt-5`}>
             {newProperty.map((item) => (
-              <div
+              <Card
+                sx={{
+                  maxWidth: 345,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: '100%',
+                }}
                 key={item._id}
-                className="bg-green-200 p-2 rounded-lg text-black"
               >
-                <figure>
-                  <img
-                    src={item.photoURL}
-                    alt=""
-                    className="bg-cover w-full h-62"
-                  />
-                </figure>
-                <div className="flex justify-between items-center">
-                  <h1 className="">{item.PropertyName}</h1>
-                  <h2 className="">{item.Category}</h2>
-                </div>
-                <div className="flex justify-between items-center">
-                  <h1 className="">{item.Price}</h1>
-                  <h2 className="">{item.location}</h2>
-                </div>
-                <h1 className="">
-                  {item.Description.length > 100
-                    ? item.Description.split(' ').slice(0, 50).join(' ') +
-                      '...........'
-                    : item.Description}
-                </h1>
-                <button
-                  onClick={() => handelNavigate(item._id)}
-                  className="w-full px-3 py-1 bg-blue-500"
+                <CardMedia
+                  sx={{ height: 140 }}
+                  image={item.photoURL}
+                  title="green iguana"
+                />
+                <CardContent
+                  sx={{
+                    flexGrow: 1,
+                    textAlgin: 'center',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                  }}
                 >
-                  View Details
-                </button>
-              </div>
+                  <Typography
+                    gutterBottom
+                    sx={{ textAlgin: 'center', fontSize: 12, fontWeight: 700 }}
+                    component="div"
+                  >
+                    {item.PropertyName}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontSize: 10,
+                      fontWeight: 700,
+                      textAlgin: 'center',
+                    }}
+                  >
+                    {item.Category}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontSize: 12,
+                      fontWeight: 700,
+                    }}
+                  >
+                    <PlaceIcon></PlaceIcon> {item.location}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    sx={{ fontSize: 12, fontWeight: 800 }}
+                  >
+                    <AttachMoneyIcon></AttachMoneyIcon>
+                    {item.Price}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    sx={{ fontSize: 12, fontWeight: 800 }}
+                  >
+
+                    {item.Description.length > 100
+                      ? item.Description.split(' ').slice(0, 30).join(' ') +
+                        '...........'
+                      : item.Description}
+                  </Typography>
+                </CardContent>
+
+                <CardActions>
+                  <ReusableButton
+                    sx={{ width: '100%' }}
+                    variant="contained"
+                    color="success"
+                    text=" See Details"
+                    onClick={() => handelNavigate(item._id)}
+                  ></ReusableButton>
+                </CardActions>
+              </Card>
+
             ))}
           </div>
         </div>

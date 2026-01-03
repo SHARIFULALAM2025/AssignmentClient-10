@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Component from '../Component/Component'
 import { useNavigate } from 'react-router'
-
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
 import { useContext } from 'react'
 import { AuthContext } from '../Authentication/Auth/AuthContext'
 import SearchBar from '../SearchBar/SearchBar'
@@ -10,7 +10,7 @@ import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
-import Button from '@mui/material/Button'
+import PlaceIcon from '@mui/icons-material/Place'
 import Typography from '@mui/material/Typography'
 import ReusableButton from '../ReusableButton/ReusableButton'
 const AllProperties = () => {
@@ -83,31 +83,65 @@ const AllProperties = () => {
             theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'
           } `}
         >
-          {allData.map((item, index) => (
-            <Card sx={{ maxWidth: 345 }} key={index}>
+          {allData.map((item) => (
+            <Card
+              sx={{
+                maxWidth: 345,
+                display: 'flex',
+                flexDirection: 'column',
+                height: '100%',
+              }}
+              key={item._id}
+            >
               <CardMedia
                 sx={{ height: 140 }}
                 image={item.photoURL}
                 title="green iguana"
               />
-              <CardContent>
+              <CardContent
+                sx={{
+                  flexGrow: 1,
+                  textAlgin: 'center',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                }}
+              >
                 <Typography
                   gutterBottom
-                  sx={{ textAlgin: 'center' }}
+                  sx={{ textAlgin: 'center', fontSize: 12, fontWeight: 700 }}
                   component="div"
                 >
                   {item.PropertyName}
                 </Typography>
-                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    fontSize: 10,
+                    fontWeight: 700,
+                    textAlgin: 'center',
+                  }}
+                >
                   {item.Category}
                 </Typography>
-                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                  {item.location}
+                <Typography
+                  variant="body2"
+                  sx={{
+                    fontSize: 12,
+                    fontWeight: 700,
+                  }}
+                >
+                  <PlaceIcon></PlaceIcon> {item.location}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{ fontSize: 12, fontWeight: 800 }}
+                >
+                  <AttachMoneyIcon></AttachMoneyIcon>
+                  {item.Price}
                 </Typography>
               </CardContent>
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {item.Price}
-              </Typography>
+
               <CardActions>
                 <ReusableButton
                   sx={{ width: '100%' }}
@@ -118,33 +152,6 @@ const AllProperties = () => {
                 ></ReusableButton>
               </CardActions>
             </Card>
-            // <div
-            //   key={item._id}
-            //   className="bg-green-200 p-2 rounded-lg text-black"
-            // >
-            //   <figure>
-            //     <img
-            //       src={item.photoURL}
-            //       alt=""
-            //       className="bg-cover w-full h-62"
-            //     />
-            //   </figure>
-            //   <div className="flex justify-between items-center">
-            //     <h1 className="">{item.PropertyName}</h1>
-            //     <h2 className="">{item.Category}</h2>
-            //   </div>
-            //   <div className="flex justify-between items-center">
-            //     <h1 className="">{item.Price}</h1>
-            //     <h2 className="">{item.location}</h2>
-            //   </div>
-            //   <h1 className="">{item.UserEmail}</h1>
-            //   <button
-            //     onClick={() => handelNavigate(item._id)}
-            //     className="w-full px-3 py-1 bg-blue-500"
-            //   >
-            //     See Details
-            //   </button>
-            // </div>
           ))}
         </div>
       </Component>
