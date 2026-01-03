@@ -17,12 +17,17 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import HomeIcon from '@mui/icons-material/Home'
-
-import { Link, Outlet } from 'react-router'
+import LogoutIcon from '@mui/icons-material/Logout'
+import { Link, NavLink, Outlet, useNavigate } from 'react-router'
 import Tooltip from '@mui/material/Tooltip'
 import { dashLink } from './DashboardLink'
-
-
+import Avatar from '@mui/material/Avatar'
+import { useContext } from 'react'
+import { AuthContext } from '../Authentication/Auth/AuthContext'
+import { settingLink } from '../Header/NavData'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
+import { toast } from 'react-toastify'
 
 const drawerWidth = 240
 const openedMixin = (theme) => ({
@@ -103,7 +108,35 @@ const Drawer = styled(MuiDrawer, {
   ],
 }))
 const Dashboard = () => {
+  const navigate = useNavigate()
+  const { LogOut, setUser } = useContext(AuthContext)
+  const handelLogout = () => {
+    LogOut()
+      .then(() => {
+        toast.success('log out successfully')
+        navigate('/', { state: true })
+
+        setUser(null)
+      })
+      .catch((error) => {
+        const ErrorMessage = error.message
+        toast(ErrorMessage)
+      })
+  }
+  /*  */
+  const profileLinkData = settingLink.filter((item) => [1, 3].includes(item.id))
+  const [anchorElUser, setAnchorElUser] = React.useState(null)
+
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget)
+  }
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null)
+  }
+  /*  */
   const drawerAnchor = 'right'
+  const { user } = useContext(AuthContext)
   const [open, setOpen] = React.useState(false)
   // const [role] = useRole()
   // const filteredLink = dashboardLink.filter((item) => item.role.includes(role))
@@ -122,28 +155,96 @@ const Dashboard = () => {
           position="fixed"
           open={open}
           component="div"
-          sx={{ backgroundColor: '#FFFFFF' }}
+          sx={{ backgroundColor: '#ffffff' }}
         >
-          <Toolbar>
-            <IconButton
-              color="primary"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              sx={[
-                {
-                  marginRight: 5,
-                },
-                open && { display: 'none' },
-              ]}
+          <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
             >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap component="div">
-              <div className="">
-                <h1 className="">Dashboard Overview</h1>
-              </div>
-            </Typography>
+              <IconButton
+                color="primary"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="start"
+                sx={[
+                  {
+                    marginRight: 5,
+                  },
+                  open && { display: 'none' },
+                ]}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography color="primary" variant="h6" noWrap component="div">
+                Dashboard Overview
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                gap: 2,
+              }}
+            >
+              <Box>
+                <Typography color="primary" variant="h6" noWrap component="div">
+                  {user?.displayName}
+                </Typography>
+                <Typography
+                  variant="h6"
+                  noWrap
+                  component="div"
+                  color="primary"
+                  sx={{ color: '' }}
+                >
+                  {user?.email}
+                </Typography>
+              </Box>
+              <Box>
+                <IconButton onClick={handleOpenUserMenu}>
+                  <Avatar src={user?.photoURL} alt="profile image"></Avatar>
+                </IconButton>
+                <Menu
+                  sx={{ mt: '45px' }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {profileLinkData.map((setting) => (
+                    <MenuItem key={setting.id} onClick={handleCloseUserMenu}>
+                      <NavLink to={setting.path}>
+                        <Typography sx={{ textAlign: 'center' }}>
+                          {setting.icon}
+                          {setting.Name}
+                        </Typography>
+                      </NavLink>
+                    </MenuItem>
+                  ))}
+                  <Divider></Divider>
+                  <MenuItem onClick={handelLogout}>
+                    <Box sx={{ display: 'flex' }}>
+                      <LogoutIcon color="error"></LogoutIcon>
+                      <Typography color="error">Log out</Typography>
+                    </Box>
+                  </MenuItem>
+                </Menu>
+              </Box>
+            </Box>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>

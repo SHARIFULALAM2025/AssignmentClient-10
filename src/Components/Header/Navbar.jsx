@@ -1,9 +1,9 @@
-import React, { useContext,  } from 'react'
+import React, { useContext } from 'react'
 import { navData, settingLink } from './NavData'
 import { Link, NavLink } from 'react-router'
 import '../../App.css'
 import { AuthContext } from '../Authentication/Auth/AuthContext'
-import {  ToastContainer } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 
 import Component from '../Component/Component'
 import AppBar from '@mui/material/AppBar'
@@ -22,7 +22,7 @@ import ReusableButton from '../ReusableButton/ReusableButton'
 import Logo from './Logo/Logo'
 import DarkMode from './DarkMode/DarkMode'
 const Navbar = () => {
-    const [anchorElNav, setAnchorElNav] = React.useState(null)
+  const [anchorElNav, setAnchorElNav] = React.useState(null)
   const [anchorElUser, setAnchorElUser] = React.useState(null)
 
   const handleOpenNavMenu = (event) => {
@@ -42,10 +42,10 @@ const Navbar = () => {
 
   const { user, theme } = useContext(AuthContext)
 
-const updateNaveLink= navData.filter(item=>[1,2,4].includes(item.id))
-const ShowNavData = user ? navData : updateNaveLink
-
-
+  const updateNaveLink = navData.filter((item) => [1, 2, 4].includes(item.id))
+  const ShowNavData = user ? navData : updateNaveLink
+  /* profile dropdown filter */
+  const profileLink = settingLink.filter((item)=>[1,2].includes(item.id))
   return (
     <div className="">
       <Component>
@@ -54,10 +54,7 @@ const ShowNavData = user ? navData : updateNaveLink
           <AppBar
             // dark mode class
             sx={{
-              background:
-                theme === 'light'
-                  ? "black"
-                  : 'white',
+              background: theme === 'light' ? 'black' : 'white',
               // backgroundColor: theme === 'light' ? 'white' : 'black',
               color: theme === 'light' ? 'white' : 'black',
 
@@ -181,7 +178,7 @@ const ShowNavData = user ? navData : updateNaveLink
                     open={Boolean(anchorElUser)}
                     onClose={handleCloseUserMenu}
                   >
-                    {settingLink.map((setting) => (
+                    {profileLink.map((setting) => (
                       <MenuItem key={setting.id} onClick={handleCloseUserMenu}>
                         <NavLink to={setting.path}>
                           <Typography sx={{ textAlign: 'center' }}>
