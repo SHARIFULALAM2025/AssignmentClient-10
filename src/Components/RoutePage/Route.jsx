@@ -14,6 +14,9 @@ import RootPage from "./RootPage"
 import ViewDetails from "../Pages/ViewDetails"
 import Account from "../Account/Account"
 import Dashboard from "../Dashboard/Dashboard"
+import Contact from "../Common/Contact"
+import About from "../Common/About"
+import Privacy from "../Common/Privacy"
 
 const router = createBrowserRouter([
   {
@@ -30,10 +33,21 @@ const router = createBrowserRouter([
         Component: Account,
       },
       {
+        path: 'contact',
+        Component: Contact,
+      },
+      {
+        path: 'about',
+        Component: About,
+      },
+      {
+        path: 'Privacy',
+        Component:Privacy,
+      },
+      {
         path: 'AllProperties',
         element: <AllProperties></AllProperties>,
       },
-      
 
       {
         path: '/UpdateView/:id',
@@ -71,7 +85,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'dashboard/MyProperty',
-        Component:MyProperties,
+        Component: MyProperties,
       },
       {
         path: 'dashboard/MyRating',

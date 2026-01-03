@@ -179,7 +179,13 @@ const Dashboard = () => {
               >
                 <MenuIcon />
               </IconButton>
-              <Typography color="primary" variant="h6" noWrap component="div">
+              <Typography
+                sx={{ display: { xs: 'none', md: 'block' } }}
+                color="primary"
+                sx={{ fontSize: 12 }}
+                noWrap
+                component="div"
+              >
                 Dashboard Overview
               </Typography>
             </Box>
@@ -192,15 +198,19 @@ const Dashboard = () => {
               }}
             >
               <Box>
-                <Typography color="primary" variant="h6" noWrap component="div">
+                <Typography
+                  sx={{ fontSize: 12 }}
+                  color="primary"
+                  noWrap
+                  component="div"
+                >
                   {user?.displayName}
                 </Typography>
                 <Typography
-                  variant="h6"
+                  sx={{ fontSize: 12 }}
                   noWrap
                   component="div"
                   color="primary"
-                  sx={{ color: '' }}
                 >
                   {user?.email}
                 </Typography>

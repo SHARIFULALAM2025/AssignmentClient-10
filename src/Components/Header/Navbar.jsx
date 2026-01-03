@@ -42,7 +42,7 @@ const Navbar = () => {
 
   const { user, theme } = useContext(AuthContext)
 
-  const updateNaveLink = navData.filter((item) => [1, 2, 4].includes(item.id))
+  const updateNaveLink = navData.filter((item) => [1,2].includes(item.id))
   const ShowNavData = user ? navData : updateNaveLink
   /* profile dropdown filter */
   const profileLink = settingLink.filter((item)=>[1,2].includes(item.id))

@@ -3,6 +3,9 @@ import { IoHome } from 'react-icons/io5'
 import HomeIcon from '@mui/icons-material/Home'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import DashboardIcon from '@mui/icons-material/Dashboard'
+import MessageIcon from '@mui/icons-material/Message'
+import InfoIcon from '@mui/icons-material/Info'
+import PrivacyTipIcon from '@mui/icons-material/PrivacyTip'
 const navData = [
   {
     id: 1,
@@ -15,6 +18,24 @@ const navData = [
     path: '/AllProperties',
     Name: 'All Properties',
     icon: <FaBuilding className="w-5 h-5" />,
+  },
+  {
+    id: 3,
+    path: '/contact',
+    Name: 'Contact',
+    icon: <MessageIcon className="w-5 h-5" />,
+  },
+  {
+    id: 4,
+    path: '/about',
+    Name: 'About',
+    icon: <InfoIcon className="w-5 h-5" />,
+  },
+  {
+    id: 5,
+    path: '/Privacy',
+    Name: 'Privacy',
+    icon: <PrivacyTipIcon className="w-5 h-5" />,
   },
 ]
 const settingLink = [
