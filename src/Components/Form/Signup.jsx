@@ -56,8 +56,8 @@ const Signup = () => {
       const user = result.user
       setUser(user)
       await saveUser({
-        Name,
-        Email,photo,
+        name:Name,
+        email:Email,photo,
       })
       await updateProfile(user, {
         displayName: Name,

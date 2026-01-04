@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react'
 import Component from '../Component/Component'
 import { useContext } from 'react'
 import { AuthContext } from '../Authentication/Auth/AuthContext'
-
+import UpdateIcon from '@mui/icons-material/Update'
 import { Link } from 'react-router'
 import Swal from 'sweetalert2'
-
+import Loading from '../Loading/Loading'
+import VisibilityIcon from '@mui/icons-material/Visibility'
+import DeleteIcon from '@mui/icons-material/Delete'
+import IconButton from '@mui/material/IconButton'
+import Tooltip from '@mui/material/Tooltip'
 const MyProperties = () => {
-  const { user, theme } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
   const [property, setProperty] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -44,7 +48,7 @@ const MyProperties = () => {
       })
       .then((result) => {
         if (result.isConfirmed) {
-          fetch(`https://assignment-10-eosin.vercel.app/product/${id}`, {
+          fetch(`http://localhost:5000/product/${id}`, {
             headers: {
               authorization: `Bearer ${user.accessToken}`,
             },
@@ -69,20 +73,18 @@ const MyProperties = () => {
       })
   }
   if (loading) {
-    return <span className="loading loading-spinner loading-xl"></span>
+    return <Loading></Loading>
   }
   return (
     <div>
       <Component>
         <div
-          className={`${
-            theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'
-          } grid grid-cols-1 md:grid-cols-4 gap-4`}
+          className={` grid grid-cols-1 md:grid-cols-4 gap-4`}
         >
           {property.map((item) => (
             <div
               key={item._id}
-              className="bg-green-200 text-black p-5 space-y-3 shadow-md rounded-md"
+              className=" text-black p-5 space-y-3 shadow-md rounded-md hover:border hover:border-gray-300"
             >
               <h1 className="text-[#004972] font-bold">{item.PropertyName}</h1>
               <div className="flex justify-between">
@@ -94,24 +96,28 @@ const MyProperties = () => {
                 <button> {item.PostedDate}</button>
               </div>
               <div className="flex justify-between">
-                <Link
-                  to={`/UpdateView/${item._id}`}
-                  className="bg-[#7B3FFF] rounded-full px-3 py-1 text-white"
-                >
-                  Update
+                <Link to={`/UpdateView/${item._id}`}>
+                  <Tooltip title="update" arrow>
+                    <IconButton aria-label="update">
+                      <UpdateIcon />
+                    </IconButton>
+                  </Tooltip>
                 </Link>
-                <Link
-                  to={`/ViewProperty/${item._id}`}
-                  className="bg-[#004972] rounded-full px-3 py-1 text-white"
-                >
-                  View Details
+                <Link to={`/ViewProperty/${item._id}`}>
+                  <Tooltip title="view details" arrow>
+                    <IconButton aria-label="update">
+                      <VisibilityIcon />
+                    </IconButton>
+                  </Tooltip>
                 </Link>
-                <button
-                  onClick={() => handelDelete(item._id)}
-                  className="bg-[#AF0800] rounded-full px-3 py-1 text-white"
-                >
-                  Delete
-                </button>
+                <Tooltip title="Delete" arrow>
+                  <IconButton
+                    onClick={() => handelDelete(item._id)}
+                    aria-label="delete"
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </Tooltip>
               </div>
             </div>
           ))}

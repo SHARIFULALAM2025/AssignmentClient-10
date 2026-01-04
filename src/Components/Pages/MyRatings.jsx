@@ -9,7 +9,7 @@ const MyRatings = () => {
 
   console.log(rating)
 
-  const { theme, user } = useContext(AuthContext)
+  const {  user } = useContext(AuthContext)
 
   useEffect(() => {
     fetch('http://localhost:5000/rating/data', {
@@ -29,16 +29,12 @@ const MyRatings = () => {
   return (
     <div>
       <Component>
-        <div
-          className={`${
-            theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'
-          } `}
-        >
+        <div className={` `}>
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3">
             {rating.map((item) => (
               <div
                 key={item._id}
-                className="bg-green-200 text-black p-3 rounded-lg"
+                className="hover:border hover:border-gray-300 text-black p-3 rounded-lg"
               >
                 <figure>
                   <img

@@ -18,6 +18,8 @@ const Social = () => {
       const result = await CreateAccountGoogle()
 
       const user = result.user
+      console.log(user);
+      
       setUser(user)
       await saveUser({
         name: user.displayName,
