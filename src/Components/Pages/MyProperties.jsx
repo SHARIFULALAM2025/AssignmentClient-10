@@ -12,14 +12,11 @@ const MyProperties = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch(
-      `https://assignment-10-eosin.vercel.app/product/unique?email=${user.email}`,
-      {
-        headers: {
-          authorization: `Bearer ${user.accessToken}`,
-        },
-      }
-    )
+    fetch(`http://localhost:5000/product/unique?email=${user.email}`, {
+      headers: {
+        authorization: `Bearer ${user.accessToken}`,
+      },
+    })
       .then((result) => result.json())
       .then((data) => {
         setProperty(data)

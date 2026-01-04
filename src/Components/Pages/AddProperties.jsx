@@ -2,11 +2,12 @@ import React, { useContext, useState } from 'react'
 import Component from '../Component/Component'
 import { AuthContext } from '../Authentication/Auth/AuthContext'
 import Swal from 'sweetalert2'
+import Loading from '../Loading/Loading'
 
 const AddProperties = () => {
   const { user, theme } = useContext(AuthContext)
   const [loading, setLoading] = useState(false)
-  const handelProperty = (e) => {
+  const handelProperty = async(e) => {
     e.preventDefault()
     setLoading(true)
     const propertyInformation = {
@@ -20,11 +21,12 @@ const AddProperties = () => {
       UserName: e.target.displayName.value,
       PostedDate: new Date(),
     }
-    fetch('https://assignment-10-eosin.vercel.app/product', {
+ const token = await user.getIdToken()
+    fetch('http://localhost:5000/product', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        authorization: `Bearer ${user.accessToken}`,
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(propertyInformation),
     })
@@ -43,7 +45,7 @@ const AddProperties = () => {
   }
   //
   if (loading) {
-    return <span className="loading loading-spinner loading-xl"></span>
+    return <Loading></Loading>
   }
   return (
     <div>

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Component from '../Component/Component'
 import { AuthContext } from '../Authentication/Auth/AuthContext'
+import Loading from '../Loading/Loading'
 
 const MyRatings = () => {
   const [rating, setRating] = useState([])
@@ -11,7 +12,7 @@ const MyRatings = () => {
   const { theme, user } = useContext(AuthContext)
 
   useEffect(() => {
-    fetch('https://assignment-10-eosin.vercel.app/rating/data', {
+    fetch('http://localhost:5000/rating/data', {
       headers: {
         authorization: `Bearer ${user.accessToken}`,
       },
@@ -23,7 +24,7 @@ const MyRatings = () => {
       })
   }, [user.accessToken])
   if (loading) {
-    return <span className="loading loading-spinner loading-xl"></span>
+    return <Loading></Loading>
   }
   return (
     <div>

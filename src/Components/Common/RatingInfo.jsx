@@ -28,7 +28,7 @@ const RatingInfo = ({ details }) => {
       Thumbnail: details.photoURL,
     }
 
-    fetch('https://assignment-10-eosin.vercel.app/rating', {
+    fetch('http://localhost:5000/rating', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',

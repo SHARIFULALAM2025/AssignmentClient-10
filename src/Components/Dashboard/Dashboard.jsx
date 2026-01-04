@@ -28,6 +28,7 @@ import { settingLink } from '../Header/NavData'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import { toast } from 'react-toastify'
+import useRole from '../Hook/useRole'
 
 const drawerWidth = 240
 const openedMixin = (theme) => ({
@@ -138,8 +139,8 @@ const Dashboard = () => {
   const drawerAnchor = 'right'
   const { user } = useContext(AuthContext)
   const [open, setOpen] = React.useState(false)
-  // const [role] = useRole()
-  // const filteredLink = dashboardLink.filter((item) => item.role.includes(role))
+  const {role} = useRole()
+  const filteredLink = dashLink.filter((item) => item.role.includes(role))
   const handleDrawerOpen = () => {
     setOpen(true)
   }
@@ -182,7 +183,7 @@ const Dashboard = () => {
               <Typography
                 sx={{ display: { xs: 'none', md: 'block' } }}
                 color="primary"
-                sx={{ fontSize: 12 }}
+                xs={{ fontSize: 12 }}
                 noWrap
                 component="div"
               >
@@ -280,7 +281,7 @@ const Dashboard = () => {
 
           <Divider />
           <List>
-            {dashLink.map((item, index) => (
+            {filteredLink.map((item, index) => (
               <ListItem key={index} disablePadding sx={{ display: 'block' }}>
                 <ListItemButton
                   component={Link}

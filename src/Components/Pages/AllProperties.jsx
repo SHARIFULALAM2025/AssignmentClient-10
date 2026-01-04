@@ -20,7 +20,7 @@ const AllProperties = () => {
   console.log(allData)
   const navigate = useNavigate()
   useEffect(() => {
-    fetch('https://assignment-10-eosin.vercel.app/product')
+    fetch('http://localhost:5000/product')
       .then((result) => result.json())
       .then((data) => {
         setAllData(data)
@@ -35,9 +35,7 @@ const AllProperties = () => {
     const PropertyName = e.target.search.value
     console.log(PropertyName)
     setLoading(true)
-    fetch(
-      `https://assignment-10-eosin.vercel.app/search?search=${PropertyName}`
-    )
+    fetch(`http://localhost:5000/search?search=${PropertyName}`)
       .then((res) => res.json())
       .then((data) => {
         setAllData(data)

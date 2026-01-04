@@ -4,6 +4,7 @@ import Component from '../Component/Component'
 import { useContext } from 'react'
 import { AuthContext } from '../Authentication/Auth/AuthContext'
 import RatingInfo from '../Common/RatingInfo'
+import Loading from '../Loading/Loading'
 
 const ViewDetails = () => {
   const { id } = useParams()
@@ -12,7 +13,7 @@ const ViewDetails = () => {
   console.log(user)
 
   useEffect(() => {
-    fetch(`https://assignment-10-eosin.vercel.app/product/${id}`, {
+    fetch(`http://localhost:5000/product/${id}`, {
       headers: {
         authorization: `Bearer ${user.accessToken}`,
       },
@@ -24,7 +25,7 @@ const ViewDetails = () => {
       })
   }, [id, user.accessToken, setLoading])
   if (loading) {
-    return <span className="loading loading-spinner loading-xl"></span>
+    return <Loading></Loading>
   }
 
   return (

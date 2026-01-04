@@ -10,6 +10,7 @@ import { updateProfile } from 'firebase/auth'
 import Swal from 'sweetalert2'
 import Social from './Social/Social'
 import ReusableButton from '../ReusableButton/ReusableButton'
+import { saveUser } from '../ReusableButton/ReusableFunction'
 
 const Signup = () => {
   const [error, setError] = useState('')
@@ -54,6 +55,10 @@ const Signup = () => {
       const result = await createUser(Email, Password)
       const user = result.user
       setUser(user)
+      await saveUser({
+        Name,
+        Email,photo,
+      })
       await updateProfile(user, {
         displayName: Name,
         photoURL: photo,
@@ -159,7 +164,7 @@ const Signup = () => {
                 </div>
 
                 <ReusableButton
-                  sx={{width:"100%"}}
+                  sx={{ width: '100%' }}
                   text="Sign Up"
                   type="submit"
                   variant="contained"

@@ -4,6 +4,7 @@ import Swal from 'sweetalert2'
 import { AuthContext } from '../../Authentication/Auth/AuthContext'
 import { useNavigate } from 'react-router'
 import { FcGoogle } from 'react-icons/fc'
+import { saveUser } from '../../ReusableButton/ReusableFunction'
 
 const Social = () => {
   const navigate = useNavigate()
@@ -11,28 +12,32 @@ const Social = () => {
 
   const { setUser, CreateAccountGoogle } = useContext(AuthContext)
 
-  const googleLogin = () => {
-    setLoading(true)
-    CreateAccountGoogle()
-      .then((result) => {
-        const user = result.user
-        setUser(user)
-        Swal.fire({
-          title: 'login successfully',
-          icon: 'success',
-          draggable: true,
-        })
-        navigate('/', { state: true })
+  const googleLogin = async () => {
+    try {
+      setLoading(true)
+      const result = await CreateAccountGoogle()
+
+      const user = result.user
+      setUser(user)
+      await saveUser({
+        name: user.displayName,
+        email: user.email,
+        photo: user.photoURL,
       })
-      .catch((error) => {
-        Swal.fire({
-          title: 'login successfully',
-          icon: 'error',
-          text: error.message,
-          draggable: true,
-        })
+      Swal.fire({
+        title: 'login successfully',
+        icon: 'success',
+        draggable: true,
       })
-      .finally(() => setLoading(false))
+      navigate('/', { state: true })
+    } catch (error) {
+      Swal.fire({
+        title: 'login successfully',
+        icon: 'error',
+        text: error.message,
+        draggable: true,
+      }).finally(() => setLoading(false))
+    }
   }
   return (
     <div>
