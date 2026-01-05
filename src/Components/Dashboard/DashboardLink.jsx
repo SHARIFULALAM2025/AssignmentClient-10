@@ -1,6 +1,6 @@
 import { AiOutlinePlusCircle } from 'react-icons/ai'
 import { FaStar } from 'react-icons/fa'
-
+import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle'
 import { MdHomeWork } from 'react-icons/md'
 const dashLink = [
   {
@@ -20,6 +20,12 @@ const dashLink = [
     role: ['Admin', 'user'],
     name: 'MyRating',
     icon: <FaStar></FaStar>,
+  },
+  {
+    path: 'dashboard/allUser',
+    role: ['Admin'],
+    name: 'AllUser',
+    icon: <SupervisedUserCircleIcon></SupervisedUserCircleIcon>,
   },
 ]
 export { dashLink }

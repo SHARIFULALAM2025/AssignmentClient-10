@@ -1,11 +1,13 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Component from '../Component/Component'
 import { AuthContext } from '../Authentication/Auth/AuthContext'
 import Swal from 'sweetalert2'
 import Loading from '../Loading/Loading'
+import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart'
+
 
 const AddProperties = () => {
-  const { user, theme } = useContext(AuthContext)
+  const { user,  } = useContext(AuthContext)
   const [loading, setLoading] = useState(false)
   const handelProperty = async(e) => {
     e.preventDefault()
@@ -43,6 +45,33 @@ const AddProperties = () => {
       })
       .finally(() => setLoading(false))
   }
+  /*  */
+  const [allData, setAllData] = useState([])
+
+
+
+  useEffect(() => {
+    fetch('http://localhost:5000/product')
+      .then((result) => result.json())
+      .then((data) => {
+        setAllData(data)
+        setLoading(false)
+      })
+  }, [])
+
+  const rentCount = allData.filter((item) => item.Category === 'Rent').length
+  const rentSell = allData.filter((item) => item.Category === 'Sale').length
+  const rentCommercial = allData.filter(
+    (item) => item.Category === 'Commercial'
+  ).length
+  const rentLand = allData.filter((item) => item.Category === 'Land').length
+  const chartData = [
+    { id: 2, value: rentCommercial, label: 'Commercial', color: '#0088FE' },
+    { id: 3, value: rentLand, label: 'Land', color: '#0088FE' },
+    { id: 0, value: rentCount, label: 'Rent', color: '#FFBB28' },
+    { id: 1, value: rentSell, label: 'Sale', color: '#FF8042' },
+  ]
+  const total=rentCommercial+rentLand+rentCount+rentSell
   //
   if (loading) {
     return <Loading></Loading>
@@ -50,9 +79,25 @@ const AddProperties = () => {
   return (
     <div>
       <Component>
-        <div
-          className={` mt-12 rounded-lg p-3 mb-6`}
-        >
+        <div className="">
+          <PieChart
+            series={[
+              {
+                data: chartData,
+                arcLabel: (item) => `${((item.value/total)*100).toFixed(0)}%`,
+                arcLabelMinAngle: 35,
+                arcLabelRadius: '60%',
+              },
+            ]}
+            sx={{
+              [`& .${pieArcLabelClasses.root}`]: {
+                fontWeight: 'bold',
+              },
+            }}
+           
+          />
+        </div>
+        <div className={` mt-12 rounded-lg p-3 mb-6`}>
           <fieldset className="fieldset border p-5  rounded-xl ">
             <legend className="p-1 border rounded-xl text-xs md:text-2xl">
               Add your Property

@@ -17,6 +17,7 @@ import Dashboard from "../Dashboard/Dashboard"
 import Contact from "../Common/Contact"
 import About from "../Common/About"
 import Privacy from "../Common/Privacy"
+import AllUser from "../Dashboard/AllUser"
 
 const router = createBrowserRouter([
   {
@@ -42,7 +43,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'Privacy',
-        Component:Privacy,
+        Component: Privacy,
       },
       {
         path: 'AllProperties',
@@ -90,6 +91,10 @@ const router = createBrowserRouter([
       {
         path: 'dashboard/MyRating',
         Component: MyRatings,
+      },
+      {
+        path: 'dashboard/allUser',
+        Component: AllUser,
       },
     ],
   },
