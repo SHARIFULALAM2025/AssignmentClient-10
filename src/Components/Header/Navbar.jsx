@@ -54,7 +54,7 @@ const Navbar = () => {
           <AppBar
             // dark mode class
             sx={{
-              background: theme === 'light' ? 'black' : 'white',
+              background: theme === 'light' ? 'white' : 'black',
               // backgroundColor: theme === 'light' ? 'white' : 'black',
               color: theme === 'light' ? 'white' : 'black',
 

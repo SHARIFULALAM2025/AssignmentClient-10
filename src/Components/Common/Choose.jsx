@@ -7,7 +7,7 @@ const Choose = () => {
 const {theme}=useContext(AuthContext)
     return (
       <div
-        className={`md:mt-5 ${
+        className={` ${
           theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'
         }`}
       >

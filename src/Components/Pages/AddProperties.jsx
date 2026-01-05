@@ -51,9 +51,7 @@ const AddProperties = () => {
     <div>
       <Component>
         <div
-          className={`${
-            theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'
-          } mt-12 rounded-lg p-3 mb-6`}
+          className={` mt-12 rounded-lg p-3 mb-6`}
         >
           <fieldset className="fieldset border p-5  rounded-xl ">
             <legend className="p-1 border rounded-xl text-xs md:text-2xl">

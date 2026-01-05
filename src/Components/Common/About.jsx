@@ -7,10 +7,17 @@ import DiscountIcon from '@mui/icons-material/Discount'
 import AddBusinessIcon from '@mui/icons-material/AddBusiness'
 import ManageHistoryIcon from '@mui/icons-material/ManageHistory'
 import ReusableButton from '../ReusableButton/ReusableButton'
+import { useContext } from 'react'
+import { AuthContext } from '../Authentication/Auth/AuthContext'
 const About = () => {
+  const {theme}=useContext(AuthContext)
   return (
     <Component>
-      <div className="space-y-10 bg-stone-50">
+      <div
+        className={`space-y-10 ${
+          theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'
+        }`}
+      >
         <div className="space-y-3">
           <div className="text-center">
             <h1 className="">We are proud of our products</h1>
@@ -219,7 +226,10 @@ const About = () => {
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy.
           </h2>
-          <ReusableButton text="View Pricing" variant="contained"></ReusableButton>
+          <ReusableButton
+            text="View Pricing"
+            variant="contained"
+          ></ReusableButton>
         </div>
       </div>
     </Component>

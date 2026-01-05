@@ -1,5 +1,7 @@
 import React from 'react';
 import Component from '../Component/Component';
+import { useContext } from 'react';
+import { AuthContext } from '../Authentication/Auth/AuthContext';
 
 const Privacy = () => {
     const sections = [
@@ -9,10 +11,15 @@ const Privacy = () => {
       { id: 'environmental-impact', title: 'Our Green Commitment' },
       { id: 'your-rights', title: 'Your Privacy Rights' },
       { id: 'contact', title: 'Contact Us' },
-    ]
+  ]
+  const {theme} =useContext(AuthContext)
     return (
       <Component>
-        <div className="min-h-screen bg-stone-50 text-slate-800 font-sans selection:bg-emerald-100">
+        <div
+          className={`min-h-screen ${
+            theme === 'dark' ? 'bg-black text-stone-50' : 'bg-white text-black'
+          }   text-slate-800 font-sans selection:bg-emerald-100`}
+        >
           {/* Header Section */}
           <header className="bg-emerald-900 py-16 px-6 text-center text-white">
             <div className="max-w-4xl mx-auto">
@@ -47,7 +54,7 @@ const Privacy = () => {
             {/* Content Section */}
             <article className="prose prose-slate prose-emerald max-w-none flex-1">
               <section id="introduction" className="mb-12 scroll-mt-8">
-                <h2 className="text-2xl font-bold text-slate-900 border-b pb-2 mb-6">
+                <h2 className="text-2xl font-bold dark:text-white text-slate-900 border-b pb-2 mb-6">
                   1. Introduction
                 </h2>
                 <p className="leading-relaxed">
@@ -59,10 +66,10 @@ const Privacy = () => {
               </section>
 
               <section id="data-collection" className="mb-12 scroll-mt-8">
-                <h2 className="text-2xl font-bold text-slate-900 border-b pb-2 mb-6">
+                <h2 className="text-2xl font-bold dark:text-white text-slate-900 border-b pb-2 mb-6">
                   2. Information We Collect
                 </h2>
-                <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm mb-6">
+                <div className="dark:bg-black dark:text-white border border-slate-200 rounded-xl p-6 shadow-sm mb-6">
                   <h3 className="text-lg font-semibold mt-0 mb-3 text-emerald-800">
                     Direct Information
                   </h3>
@@ -85,7 +92,7 @@ const Privacy = () => {
 
               <section
                 id="environmental-impact"
-                className="mb-12 scroll-mt-8 bg-emerald-50 p-8 rounded-2xl border border-emerald-100"
+                className="mb-12 scroll-mt-8 dark:bg-black dark:text-white  p-8 rounded-2xl border border-emerald-100"
               >
                 <h2 className="text-2xl font-bold text-emerald-900 mb-4">
                   3. Our Green Data Commitment
@@ -109,11 +116,11 @@ const Privacy = () => {
               </section>
 
               <section id="your-rights" className="mb-12 scroll-mt-8">
-                <h2 className="text-2xl font-bold text-slate-900 border-b pb-2 mb-6">
+                <h2 className="text-2xl font-bold dark:text-white text-slate-900 border-b pb-2 mb-6">
                   4. Your Privacy Rights
                 </h2>
                 <p>Under global data protection laws, you have the right to:</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                <div className="grid grid-cols-1 dark:bg-white dark:text-black  sm:grid-cols-2 gap-4 mt-4">
                   {[
                     'Access your data',
                     'Request deletion',
@@ -132,7 +139,7 @@ const Privacy = () => {
               </section>
 
               <section id="contact" className="mb-12 scroll-mt-8">
-                <h2 className="text-2xl font-bold text-slate-900 border-b pb-2 mb-6">
+                <h2 className="text-2xl font-bold dark:text-white text-slate-900 border-b pb-2 mb-6">
                   5. Contact Us
                 </h2>
                 <p>
@@ -148,8 +155,6 @@ const Privacy = () => {
               </section>
             </article>
           </main>
-
-        
         </div>
       </Component>
     )

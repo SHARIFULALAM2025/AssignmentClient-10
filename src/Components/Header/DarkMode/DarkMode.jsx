@@ -21,7 +21,7 @@ const DarkMode = () => {
       <div className="">
         <button
           onClick={toggleTheme}
-          className="rounded-full p-2 bg-purple-400 text-gray-600 hover:text-purple-400 transition-all ease-in-out shadow-md"
+          className="rounded-full p-2  text-white bg-linear-to-r from-[#373FFF] to-[#3ACAF8]  transition-all ease-in-out shadow-md"
         >
           {theme === 'light' ? (
             <FaRegMoon className="w-5 h-5"></FaRegMoon>
