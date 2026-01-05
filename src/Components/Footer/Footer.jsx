@@ -126,17 +126,17 @@ const Footer = () => {
                 <div className="space-y-3">
                   <h1 className="text-white">Connect with Us</h1>
                   <div className="flex flex-row space-x-5">
-                    <Link>
+                    <Link to="https://www.facebook.com/profile.php?id=61577170528426">
                       <FaFacebook className="w-6 h-6 rounded-full text-white"></FaFacebook>
                     </Link>
-                    <Link>
+                    <Link to="">
                       <FaXTwitter className="w-6 h-6 rounded-full text-white"></FaXTwitter>
                     </Link>
-                    <Link>
+                    <Link to="https://www.instagram.com/programminghero/">
                       {' '}
                       <FaSquareInstagram className="w-6 h-6 rounded-full text-white"></FaSquareInstagram>
                     </Link>
-                    <Link>
+                    <Link to="https://www.youtube.com/c/ProgrammingHeroCommunity">
                       {' '}
                       <FaYoutube className="w-6 h-6 rounded-full text-white"></FaYoutube>
                     </Link>
