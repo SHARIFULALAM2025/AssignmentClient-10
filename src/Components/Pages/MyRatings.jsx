@@ -30,6 +30,7 @@ const MyRatings = () => {
     <div>
       <Component>
         <div className={` `}>
+          <h1 className="text-center font-bold text-2xl">your rating</h1>
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3">
             {rating.map((item) => (
               <div
@@ -40,7 +41,7 @@ const MyRatings = () => {
                   <img
                     src={item.Thumbnail}
                     alt=""
-                    className="w-full bg-cover h-62"
+                    className="w-full bg-cover h-62 rounded-xl"
                   />
                 </figure>
                 <div className="flex justify-between">

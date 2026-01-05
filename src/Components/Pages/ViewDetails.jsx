@@ -32,24 +32,37 @@ const ViewDetails = () => {
     <div>
       <Component>
         <div
-          className={`grig md:grid-cols-2 ${
+          className={`grid md:grid-cols-2 gap-5 ${
             theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'
           }`}
         >
           <div className="">
             <figure>
-              <img src={details.photoURL} alt="" className="" />
+              <img
+                src={details.photoURL}
+                alt=""
+                className="h-80 object-cover w-full rounded-xl"
+              />
             </figure>
           </div>
-          <div className="">
-            <h1 className="">{details.PropertyName}</h1>
-            <p className="">{details.Description}</p>
-            <h1 className="">{details.Price}</h1>
-            <h1 className="">{details.location}</h1>
-            <h1 className="">{details.PostedDate}</h1>
-            <h1 className="">{user.displayName}</h1>
-            <h1 className="">{user.email}</h1>
-            <img src={user?.photoURL} alt="" className="" />
+          <div className="flex-1">
+            <h1 className="text-xl font-bold">{details.PropertyName}</h1>
+            <p className="text-xs">{details.Description}</p>
+            <div className="md:flex justify-between items-center">
+              <div className="">
+                <h1 className="font-bold text-pink-600">{details.Price} taka</h1>
+                <h1 className="">{details.location}</h1>
+                <h1 className="">{details.PostedDate}</h1>
+              </div>
+              <div className="flex gap-2 items-center ">
+                <div className="">
+                  {' '}
+                  <h1 className="">{user.displayName}</h1>
+                  <h1 className="">{user.email}</h1>
+                </div>
+                <img src={user?.photoURL} alt="" className="rounded-full" />
+              </div>
+            </div>
           </div>
         </div>
         <RatingInfo details={details}></RatingInfo>

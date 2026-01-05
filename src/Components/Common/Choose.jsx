@@ -7,7 +7,7 @@ const Choose = () => {
 const {theme}=useContext(AuthContext)
     return (
       <div
-        className={`${
+        className={`md:mt-5 ${
           theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'
         }`}
       >
@@ -17,12 +17,12 @@ const {theme}=useContext(AuthContext)
               <img
                 src="https://i.ibb.co.com/4RHjjGQz/Photo.png"
                 alt=""
-                className="w-full object-cover"
+                className="w-full object-cover rounded-xl"
               />
             </figure>
           </div>
-          <div className="">
-            <h1 className="text-[#AF0800] md:text-3xl font-bold">
+          <div className="text-xs border-l-4">
+            <h1 className=" md:text-2xl font-bold">
               trust is everything
             </h1>
             <p className="">
@@ -34,7 +34,7 @@ const {theme}=useContext(AuthContext)
             <div className="">
               <ol>
                 <li>
-                  <span className="text-green-700 font-bold text-xl">
+                  <span className=" font-bold text-base">
                     {' '}
                     Extensive Property Options:
                   </span>{' '}
@@ -43,7 +43,7 @@ const {theme}=useContext(AuthContext)
                   properties to meet diverse needs.
                 </li>
                 <li>
-                  <span className="text-green-700 font-bold text-xl">
+                  <span className=" font-bold text-base">
                     {' '}
                     Verified Listings:
                   </span>{' '}
@@ -52,7 +52,7 @@ const {theme}=useContext(AuthContext)
                   legitimacy standards.
                 </li>
                 <li>
-                  <span className="text-green-700 font-bold text-xl">
+                  <span className=" font-bold text-base">
                     User-Friendly Platform:{' '}
                   </span>
                   Our intuitive interface allows you to easily search, filter,
@@ -60,7 +60,7 @@ const {theme}=useContext(AuthContext)
                   fast and simple
                 </li>
                 <li>
-                  <span className="text-green-700 font-bold text-xl">
+                  <span className=" font-bold text-base">
                     Expert Guidance:
                   </span>
                   Our team of real estate experts is always ready to provide
@@ -68,7 +68,7 @@ const {theme}=useContext(AuthContext)
                   perfectly matches your requirements.
                 </li>
                 <li>
-                  <span className="text-green-700 font-bold text-xl">
+                  <span className=" font-bold text-base">
                     Secure Transactions:
                   </span>{' '}
                   Safety and privacy are our top priorities. Our platform
@@ -76,7 +76,7 @@ const {theme}=useContext(AuthContext)
                   buyers, sellers, and renters
                 </li>
                 <li>
-                  <span className="text-green-700 font-bold text-xl">
+                  <span className=" font-bold text-base">
                     {' '}
                     Customer Satisfaction:
                   </span>{' '}
@@ -88,20 +88,20 @@ const {theme}=useContext(AuthContext)
             </div>
             <div className="flex items-center gap-2">
               <FaRegCheckCircle></FaRegCheckCircle>
-              <h1 className="text-red-700 font-bold">
+              <h1 className=" font-bold">
                 18+ Years of Experience
               </h1>
             </div>
             <div className="flex items-center gap-2">
               <FaRegCheckCircle></FaRegCheckCircle>
-              <h1 className="text-red-700 font-bold">
+              <h1 className=" font-bold">
                 Quality Services and Expertise
               </h1>
             </div>
 
             <div className="flex items-center gap-2">
               <FaRegCheckCircle></FaRegCheckCircle>
-              <h1 className="text-red-700 font-bold">
+              <h1 className=" font-bold">
                 Skilled, Trained and Experienced Staff
               </h1>
             </div>

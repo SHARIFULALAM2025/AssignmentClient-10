@@ -3,8 +3,10 @@ import { useContext } from 'react'
 import { AuthContext } from '../Authentication/Auth/AuthContext'
 import { useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
+import SendIcon from '@mui/icons-material/Send';
 
 import { useNavigate } from 'react-router'
+import ReusableButton from '../ReusableButton/ReusableButton'
 
 const RatingInfo = ({ details }) => {
   const navigate = useNavigate()
@@ -50,12 +52,12 @@ const RatingInfo = ({ details }) => {
   }
   return (
     <div
-      className={`grig md:grid-cols-2  ${
+      className={`grig md:grid-cols-2 md:mt-5  ${
         theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'
       }`}
     >
       <fieldset className="fieldset border  rounded-xl p-1">
-        <legend className="p-1 border rounded-xl text-xs md:text-2xl">
+        <legend className=" p-1 border rounded-xl text-xs md:text-xs">
           your feedback
         </legend>
         <form onSubmit={handelRating} className="">
@@ -85,7 +87,7 @@ const RatingInfo = ({ details }) => {
               id=""
               onChange={(e) => setReview(e.target.value)}
               value={review}
-              className="w-full border "
+              className="w-full border rounded-xl "
               rows={10}
               placeholder="enter your property description ......"
               required
@@ -94,9 +96,12 @@ const RatingInfo = ({ details }) => {
 
           <div className="grid place-content-center">
             {' '}
-            <button type="submit" className="btn btn-success px-6 py-3">
-              submit
-            </button>
+            <ReusableButton
+              variant="contained"
+              text="submit"
+              endIcon={<SendIcon></SendIcon>}
+              type="submit"
+            ></ReusableButton>
           </div>
         </form>
       </fieldset>
