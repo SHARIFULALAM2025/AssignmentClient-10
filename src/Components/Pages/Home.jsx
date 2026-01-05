@@ -91,9 +91,9 @@ const Home = () => {
                         alt="careImage"
                         className="object-cover rounded"
                       />
-                      <div className="absolute top-1/2">
+                      <div className="absolute top-1/2 ">
                         {' '}
-                        <h1 className="text-green-500 text-2xl font-bold">
+                        <h1 className=" bg-linear-to-r from-[#373FFF] to-[#3ACAF8] bg-clip-text text-transparent md:text-5xl font-bold">
                           {item.PropertyName}
                         </h1>
                       </div>
@@ -166,7 +166,6 @@ const Home = () => {
                     variant="body2"
                     sx={{ fontSize: 12, fontWeight: 800 }}
                   >
-
                     {item.Description.length > 100
                       ? item.Description.split(' ').slice(0, 30).join(' ') +
                         '...........'
@@ -184,8 +183,13 @@ const Home = () => {
                   ></ReusableButton>
                 </CardActions>
               </Card>
-
             ))}
+          </div>
+          <div className="flex items-center justify-center md:mt-5">
+            <ReusableButton
+              text="view more"
+              variant="contained"
+            ></ReusableButton>
           </div>
         </div>
         <Choose></Choose>

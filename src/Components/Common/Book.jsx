@@ -6,7 +6,7 @@ const Book = () => {
     const {theme}=useContext(AuthContext)
     return (
       <div
-        className={`${
+        className={` md:mt:5 ${
           theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'
         }`}
       >
