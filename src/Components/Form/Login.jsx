@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { BsFillEyeSlashFill } from 'react-icons/bs'
-import { FcGoogle } from 'react-icons/fc'
+
 import { IoEyeSharp } from 'react-icons/io5'
 import { Link, useNavigate } from 'react-router'
 import { AuthContext } from '../Authentication/Auth/AuthContext'
@@ -48,7 +48,19 @@ const Login = () => {
         console.log(errorMessage)
       })
   }
+  /* admin criditiential */
 
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState("")
+  const handelDemoLogin = (role) => {
+if (role === "Admin") {
+  setEmail('sharifullinkdin2025@gmail.com')
+  setPassword("Abc123")
+} else {
+  setEmail('sharifullinkdin202@gmail.com')
+  setPassword('Abc123')
+}
+  }
   return (
     <div className="">
       <Component>
@@ -78,6 +90,8 @@ const Login = () => {
                   <label className="text-[14px] font-normal">Email</label>
                   <input
                     name="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="py-2 rounded-sm border-2 border-[rgba(210,210,210,1)] outline-none"
                     type="email"
                     placeholder="Enter your email....."
@@ -88,6 +102,8 @@ const Login = () => {
                   <label className="text-[14px] font-normal">Password</label>
                   <input
                     name="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     className="py-2 rounded-sm border-2 border-[rgba(210,210,210,1)] outline-none"
                     type={eye ? 'password' : 'text'}
                     placeholder="***********"
@@ -133,6 +149,27 @@ const Login = () => {
               </form>
               <div className="">
                 <Social></Social>
+              </div>
+            </div>
+            <div className="flex justify-center items-center gap-4">
+              <div className="h-px bg-gray-500 w-full"></div>
+              <p className="">or</p>
+              <div className="h-px bg-gray-500 w-full"></div>
+            </div>
+            <div className="">
+              <p className="text-center font-bold">Auto login</p>
+
+              <div className="flex gap-3">
+                <ReusableButton
+                  onClick={() => handelDemoLogin('Admin')}
+                  text="Admin demo"
+                  variant="contained"
+                ></ReusableButton>
+                <ReusableButton
+                  variant="contained"
+                  onClick={() => handelDemoLogin('user')}
+                  text="User demo"
+                ></ReusableButton>
               </div>
             </div>
           </div>
