@@ -9,20 +9,24 @@ import { toast, ToastContainer } from 'react-toastify'
 const AllUser = () => {
   const [user, setUser] = useState([])
   useEffect(() => {
-    axios.get('http://localhost:5000/userData').then((result) => {
-      setUser(result.data)
-    })
+    axios
+      .get('https://assignment-10-eosin.vercel.app/userData')
+      .then((result) => {
+        setUser(result.data)
+      })
   }, [])
 
   const paginationModel = { page: 0, pageSize: 5 }
   const handelDelete = (id) => {
-    axios.delete(`http://localhost:5000/delete-user/${id}`).then((res) => {
-      if (res.data.deletedCount > 0) {
-        const filterUser = user.filter((item) => item._id !== id)
+    axios
+      .delete(`https://assignment-10-eosin.vercel.app/delete-user/${id}`)
+      .then((res) => {
+        if (res.data.deletedCount > 0) {
+          const filterUser = user.filter((item) => item._id !== id)
           setUser(filterUser)
-          toast.success( "user delete successfully")
-      }
-    })
+          toast.success('user delete successfully')
+        }
+      })
 
     console.log(id)
   }
@@ -71,8 +75,8 @@ const AllUser = () => {
           checkboxSelection
           sx={{ border: 0 }}
         />
-          </Paper>
-          <ToastContainer></ToastContainer>
+      </Paper>
+      <ToastContainer></ToastContainer>
     </div>
   )
 }

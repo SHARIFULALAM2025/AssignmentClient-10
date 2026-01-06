@@ -45,7 +45,7 @@ const Account = () => {
     const userData = async () => {
       if (!user.email) return
       const { data } = await axios.get(
-        `http://localhost:5000/allUser/role/${user.email}`
+        `https://assignment-10-eosin.vercel.app/allUser/role/${user.email}`
       )
       console.log(data)
 
@@ -76,13 +76,11 @@ const Account = () => {
       console.log(profileData)
 
       const res = await axios.put(
-        `http://localhost:5000/profile/${user.email}`,
+        `https://assignment-10-eosin.vercel.app/profile/${user.email}`,
         profileData
       )
       if (res.data.modifiedCount > 0) {
         toast.success('profile update successfully')
-
-        
 
         console.log(user)
 

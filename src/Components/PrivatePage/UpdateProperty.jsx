@@ -26,7 +26,7 @@ const UpdateProperty = () => {
       UserName: e.target.displayName.value,
       PostedDate: new Date(),
     }
-    fetch(`http://localhost:5000/product/${id}`, {
+    fetch(`https://assignment-10-eosin.vercel.app/product/${id}`, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json',
@@ -45,7 +45,7 @@ const UpdateProperty = () => {
   }
 
   useEffect(() => {
-    fetch(`http://localhost:5000/product/${id}`, {
+    fetch(`https://assignment-10-eosin.vercel.app/product/${id}`, {
       headers: {
         authorization: `Bearer ${user.accessToken}`,
       },

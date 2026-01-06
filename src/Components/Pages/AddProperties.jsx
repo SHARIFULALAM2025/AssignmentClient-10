@@ -6,10 +6,11 @@ import Loading from '../Loading/Loading'
 import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart'
 
 
+
 const AddProperties = () => {
-  const { user,  } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
   const [loading, setLoading] = useState(false)
-  const handelProperty = async(e) => {
+  const handelProperty = async (e) => {
     e.preventDefault()
     setLoading(true)
     const propertyInformation = {
@@ -23,8 +24,8 @@ const AddProperties = () => {
       UserName: e.target.displayName.value,
       PostedDate: new Date(),
     }
- const token = await user.getIdToken()
-    fetch('http://localhost:5000/product', {
+    const token = await user.getIdToken()
+    fetch('https://assignment-10-eosin.vercel.app/product', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -48,10 +49,8 @@ const AddProperties = () => {
   /*  */
   const [allData, setAllData] = useState([])
 
-
-
   useEffect(() => {
-    fetch('http://localhost:5000/product')
+    fetch('https://assignment-10-eosin.vercel.app/product')
       .then((result) => result.json())
       .then((data) => {
         setAllData(data)
@@ -71,7 +70,7 @@ const AddProperties = () => {
     { id: 0, value: rentCount, label: 'Rent', color: '#FFBB28' },
     { id: 1, value: rentSell, label: 'Sale', color: '#FF8042' },
   ]
-  const total=rentCommercial+rentLand+rentCount+rentSell
+  const total = rentCommercial + rentLand + rentCount + rentSell
   //
   if (loading) {
     return <Loading></Loading>
@@ -84,7 +83,8 @@ const AddProperties = () => {
             series={[
               {
                 data: chartData,
-                arcLabel: (item) => `${((item.value/total)*100).toFixed(0)}%`,
+                arcLabel: (item) =>
+                  `${((item.value / total) * 100).toFixed(0)}%`,
                 arcLabelMinAngle: 35,
                 arcLabelRadius: '60%',
               },
@@ -94,7 +94,6 @@ const AddProperties = () => {
                 fontWeight: 'bold',
               },
             }}
-           
           />
         </div>
         <div className={` mt-12 rounded-lg p-3 mb-6`}>

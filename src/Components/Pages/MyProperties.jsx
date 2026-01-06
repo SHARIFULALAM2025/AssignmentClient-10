@@ -16,11 +16,14 @@ const MyProperties = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch(`http://localhost:5000/product/unique?email=${user.email}`, {
-      headers: {
-        authorization: `Bearer ${user.accessToken}`,
-      },
-    })
+    fetch(
+      `https://assignment-10-eosin.vercel.app/product/unique?email=${user.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${user.accessToken}`,
+        },
+      }
+    )
       .then((result) => result.json())
       .then((data) => {
         setProperty(data)
@@ -48,7 +51,7 @@ const MyProperties = () => {
       })
       .then((result) => {
         if (result.isConfirmed) {
-          fetch(`http://localhost:5000/product/${id}`, {
+          fetch(`https://assignment-10-eosin.vercel.app/product/${id}`, {
             headers: {
               authorization: `Bearer ${user.accessToken}`,
             },
@@ -78,9 +81,7 @@ const MyProperties = () => {
   return (
     <div>
       <Component>
-        <div
-          className={` grid grid-cols-1 md:grid-cols-4 gap-4`}
-        >
+        <div className={` grid grid-cols-1 md:grid-cols-4 gap-4`}>
           {property.map((item) => (
             <div
               key={item._id}

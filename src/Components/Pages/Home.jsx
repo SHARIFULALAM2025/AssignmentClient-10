@@ -29,7 +29,7 @@ const Home = () => {
   console.log(newProperty)
 
   useEffect(() => {
-    fetch('http://localhost:5000/home/date')
+    fetch('https://assignment-10-eosin.vercel.app/home/date')
       .then((result) => result.json())
       .then((data) => {
         setNewProperty(data)

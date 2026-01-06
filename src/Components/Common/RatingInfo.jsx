@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { AuthContext } from '../Authentication/Auth/AuthContext'
 import { useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
-import SendIcon from '@mui/icons-material/Send';
+import SendIcon from '@mui/icons-material/Send'
 
 import { useNavigate } from 'react-router'
 import ReusableButton from '../ReusableButton/ReusableButton'
@@ -30,7 +30,7 @@ const RatingInfo = ({ details }) => {
       Thumbnail: details.photoURL,
     }
 
-    fetch('http://localhost:5000/rating', {
+    fetch('https://assignment-10-eosin.vercel.app/rating', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',

@@ -6,17 +6,17 @@ import { AuthContext } from '../Authentication/Auth/AuthContext'
 
 const useRole = () => {
   const [role, setRole] = useState(null)
-  const { user, loading} = useContext(AuthContext)
+  const { user, loading } = useContext(AuthContext)
   const [roleLoading, setRoleLoading] = useState(true)
 
-    useEffect(() => {
-      if (!user?.email || loading) return
+  useEffect(() => {
+    if (!user?.email || loading) return
     const fetchRole = async () => {
       try {
-          const res = await axios.get(
-            `http://localhost:5000/users/role/${user?.email}`
-          )
-          console.log(res.data.role);
+        const res = await axios.get(
+          `https://assignment-10-eosin.vercel.app/users/role/${user?.email}`
+        )
+        console.log(res.data.role)
 
         setRole(res.data.role)
       } catch (error) {
@@ -24,11 +24,11 @@ const useRole = () => {
       } finally {
         setRoleLoading(false)
       }
-      }
-      fetchRole()
-  }, [user,loading])
+    }
+    fetchRole()
+  }, [user, loading])
 
-return { role, roleLoading }
+  return { role, roleLoading }
 }
 
 export default useRole

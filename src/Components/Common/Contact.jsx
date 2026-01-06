@@ -18,12 +18,14 @@ import ReusableButton from '../ReusableButton/ReusableButton'
 import { toast } from 'react-toastify'
 import Component from '../Component/Component'
 const Contact = () => {
-
   const { register, handleSubmit, reset } = useForm()
   const { theme } = useContext(AuthContext)
   const handelMessage = async (data) => {
     try {
-      const res = await axios.post('http://localhost:5000/messageAll', data)
+      const res = await axios.post(
+        'https://assignment-10-eosin.vercel.app/messageAll',
+        data
+      )
       if (res.data.insertedId) {
         toast.success('message submit successfully!')
         reset()

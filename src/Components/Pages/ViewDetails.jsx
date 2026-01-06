@@ -13,7 +13,7 @@ const ViewDetails = () => {
   console.log(user)
 
   useEffect(() => {
-    fetch(`http://localhost:5000/product/${id}`, {
+    fetch(`https://assignment-10-eosin.vercel.app/product/${id}`, {
       headers: {
         authorization: `Bearer ${user.accessToken}`,
       },
@@ -50,7 +50,9 @@ const ViewDetails = () => {
             <p className="text-xs">{details.Description}</p>
             <div className="md:flex justify-between items-center">
               <div className="">
-                <h1 className="font-bold text-pink-600">{details.Price} taka</h1>
+                <h1 className="font-bold text-pink-600">
+                  {details.Price} taka
+                </h1>
                 <h1 className="">{details.location}</h1>
                 <h1 className="">{details.PostedDate}</h1>
               </div>

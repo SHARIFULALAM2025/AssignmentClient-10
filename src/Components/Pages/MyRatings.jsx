@@ -9,10 +9,10 @@ const MyRatings = () => {
 
   console.log(rating)
 
-  const {  user } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
 
   useEffect(() => {
-    fetch('http://localhost:5000/rating/data', {
+    fetch('https://assignment-10-eosin.vercel.app/rating/data', {
       headers: {
         authorization: `Bearer ${user.accessToken}`,
       },
